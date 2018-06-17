@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("routes")
+@RequestMapping("route")
 public class RouteController {
 
     @Autowired
@@ -18,8 +18,6 @@ public class RouteController {
 
     @GetMapping(value = "")
     public String route(Model model){
-        model.addAttribute("operation", "list");
-        model.addAttribute("tittle","Lista de rotas");
         model.addAttribute("route", routeRepository.findAll());
         return "routes";
     }

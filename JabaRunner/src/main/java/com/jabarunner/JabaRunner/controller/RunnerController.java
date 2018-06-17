@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping(value = "runners")
+@RequestMapping(value = "runner")
 public class RunnerController {
 
     @Autowired
@@ -20,24 +20,22 @@ public class RunnerController {
 
     @GetMapping
     public String runners(Model model) {
-        model.addAttribute("operation", "list");
         model.addAttribute("tittle", "Lista de corredores");
-        model.addAttribute("runners", runnerRepository.findAll());
-        return "runner/runners";
+        model.addAttribute("runner", runnerRepository.findAll());
+        return "runner/listRunners";
     }
 
-    @GetMapping(value = "add")
+    @GetMapping(value = "/add")
     public String getRunnersAdd(Model model) {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar corredor");
-        return "runner/runners";
+        return "runner/formRunners";
     }
 
-    @PostMapping(value = "add")
+    @PostMapping(value = "/add")
     public String postRunnersAdd(Model model, @ModelAttribute Runner runner) {
-        model.addAttribute("tittle", "Adicionar corredor");
         runnerRepository.save(runner);
-        return "redirect:/runners";
+        return "redirect:/runner";
     }
 
     @GetMapping(value = "edit/{id}")
@@ -46,9 +44,9 @@ public class RunnerController {
         model.addAttribute("title", "Editar corredor");
         Optional<Runner> runner = runnerRepository.findById(id);
         if (runner.isPresent()) {
-            model.addAttribute("corredor", runner.get());
+            model.addAttribute("runner", runner.get());
         }
-        return "runner/runners";
+        return "runner/formRunners";
     }
 
     @PostMapping(value = "edit/{id}")
@@ -59,7 +57,7 @@ public class RunnerController {
         } else {
             model.addAttribute("error", "Dados incorretos");
         }
-        return "redirect:/runners";
+        return "redirect:/runner";
     }
 
     @GetMapping(value = "delete/{id}")
@@ -68,7 +66,9 @@ public class RunnerController {
         model.addAttribute("tittle", "Excluir corredor");
         Optional<Runner> runner = runnerRepository.findById(id);
         if (runner.isPresent()) {
-            model.addAttribute("corredor", runner.get());
+            model.addAttribute("runner", runner.get());
+            model.addAttribute("operation", "delete");
+            model.addAttribute("botaoOperacao", "Deletar corredor");
         }
 
         return "runner/runners.html";
@@ -77,6 +77,6 @@ public class RunnerController {
     @PostMapping(value = "delete/{id}")
     public String postRunnerDelete(@PathVariable Long id, @ModelAttribute Runner runner) {
         runnerRepository.delete(runner);
-        return "redirect:/runners";
+        return "redirect:/runner";
     }
 }

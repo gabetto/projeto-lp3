@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Corredores</title>
+</head>
+<body>
+    <h1>
+        Listar corredores
+    </h1>
+
+    <table>
+        <tr th:each="Corredor : ${runners}">
+            <td th:text="${runner.name}">nome</td>
+            <td th:text="${runner.email}">Email</td>
+            <td><a th:href="@{'/runner/edit/' + ${runner.id}}">Editar</a></td>
+            <td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
+        </tr>
+    </table>
+    <h2 th:unless="${!chips.isEmpty()}">Sem corredores</h2>
+
+    <a th:href="@{~/runner/add}">Adicionar</a>
+
+</body>
+</html>
