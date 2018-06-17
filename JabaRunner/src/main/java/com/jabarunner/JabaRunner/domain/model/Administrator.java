@@ -1,14 +1,14 @@
 package com.jabarunner.JabaRunner.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jabarunner.JabaRunner.domain.utils.Capitalize;
-import com.jabarunner.JabaRunner.domain.utils.contracts.ModelValidation;
-import com.jabarunner.JabaRunner.domain.utils.exceptions.BeforeDateException;
-import com.jabarunner.JabaRunner.domain.utils.exceptions.CpfException;
-import com.jabarunner.JabaRunner.domain.utils.exceptions.EmailException;
-import com.jabarunner.JabaRunner.domain.utils.exceptions.PasswordException;
-import com.jabarunner.JabaRunner.domain.utils.validations.RegexFilters;
-import com.jabarunner.JabaRunner.domain.utils.validations.Validations;
+import com.jabarunner.JabaRunner.utils.Capitalize;
+import com.jabarunner.JabaRunner.utils.contracts.ModelValidation;
+import com.jabarunner.JabaRunner.utils.exceptions.BeforeDateException;
+import com.jabarunner.JabaRunner.utils.exceptions.CpfException;
+import com.jabarunner.JabaRunner.utils.exceptions.EmailException;
+import com.jabarunner.JabaRunner.utils.exceptions.PasswordException;
+import com.jabarunner.JabaRunner.utils.validations.RegexFilters;
+import com.jabarunner.JabaRunner.utils.validations.Validations;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

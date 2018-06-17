@@ -1,4 +1,4 @@
-package com.jabarunner.JabaRunner.domain.utils;/*
+package com.jabarunner.JabaRunner.utils;/*
  * Capitalize it's a little class to implements capitalize strings, convert cases (Slug, Camel and Sneak).
  * Using Capitalize:
  * String name = "pedRO DE ALcÂntARA joão carlOs";

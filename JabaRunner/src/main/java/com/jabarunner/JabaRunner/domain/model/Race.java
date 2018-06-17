@@ -1,7 +1,7 @@
 package com.jabarunner.JabaRunner.domain.model;
 
-import com.jabarunner.JabaRunner.domain.utils.Capitalize;
-import com.jabarunner.JabaRunner.domain.utils.contracts.ModelValidation;
+import com.jabarunner.JabaRunner.utils.Capitalize;
+import com.jabarunner.JabaRunner.utils.contracts.ModelValidation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

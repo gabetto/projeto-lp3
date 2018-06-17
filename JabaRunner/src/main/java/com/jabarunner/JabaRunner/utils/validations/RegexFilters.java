@@ -1,4 +1,4 @@
-package com.jabarunner.JabaRunner.domain.utils.validations;
+package com.jabarunner.JabaRunner.utils.validations;
 
 import java.util.regex.Pattern;
 

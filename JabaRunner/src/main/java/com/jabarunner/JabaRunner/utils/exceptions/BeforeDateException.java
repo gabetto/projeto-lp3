@@ -1,4 +1,4 @@
-package com.jabarunner.JabaRunner.domain.utils.exceptions;
+package com.jabarunner.JabaRunner.utils.exceptions;
 
 public class BeforeDateException extends Exception {
     @Override

@@ -1,4 +1,4 @@
-package com.jabarunner.JabaRunner.domain.utils.contracts;
+package com.jabarunner.JabaRunner.utils.contracts;
 
 public interface ModelValidation<T> {
     T validate() throws Exception;
