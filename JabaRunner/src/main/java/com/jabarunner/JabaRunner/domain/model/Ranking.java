@@ -39,12 +39,11 @@ public class Ranking implements Serializable, ModelValidation<Ranking> {
     @Basic
     @Column(name = "idade_final", nullable = false)
     private Integer idadeFinal;
-
     @ManyToMany
     @JoinTable(name = "corrida_has_ranking",
             joinColumns = @JoinColumn(name = "rankings_id"),
             inverseJoinColumns = @JoinColumn(name = "corridas_id"))
-    private Collection<Race> Race;
+    private Collection<Race> races;
 
     @Override
     public Ranking validate() throws Exception {
