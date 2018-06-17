@@ -19,7 +19,7 @@ public class RaceController {
     @GetMapping(value = "")
     public String race(Model model){
         model.addAttribute("tittle", "Lista de corridas");
-        model.addAttribute("race", raceRepository.findAll());
+        model.addAttribute("races", raceRepository.findAll());
         return "race/listRaces";
     }
 

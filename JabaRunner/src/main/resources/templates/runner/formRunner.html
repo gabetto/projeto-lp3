@@ -1,54 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
-    <title>Corredores</title>
+    <meta charset="UTF-8"/>
+    <title>Corredor</title>
 </head>
 <body>
-<h1 th:text="${tittle}">
-    Operation
-</h1>
 
-<form method="post" th:object="${runner}">
-    <label>
-        <b>Nome:</b>
-    </label>
-    <input th:value="${runner.name}" th:disabled="${operation} == delete" type="text" name="name"/><
-    <label>
-        <b>Apelido:</b>
-    </label>
-    <input th:value="${runner?.nickname}" th:disabled="${operation} == delete" type="text" name="nickname"/>
-    <label>
-        <b>Email:</b>
-    </label>
-    <input th:value="${runner?.email}" th:disabled="${operation} == delete" type="text" name="email"/>
-    <label>
-        <b>Senha:</b>
-    </label>
-    <input th:value="${runner?.password}" th:disabled="${operation} == delete" type="text" name="password"/>
-    <label>
-        <b>Confirmar senha:</b>
-    </label>
-    <input th:value="${runner?.confirmPassword}" th:disabled="${operation} == delete" type="text" name="confirmPassword"/>
-    <label>
-        <b>CPF:</b>
-    </label>
-    <input th:value="${runner?.cpf}" th:disabled="${operation} == delete" type="text" name="cpf"/>
-    <label>
-        <b>RG:</b>
-    </label>
-    <input th:value="${runner?.rg}" th:disabled="${operation} == delete" type="text" name="rg"/>
-    <label>
-        <b>Data de nascimento:</b>
-    </label>
-    <input th:value="${runner?.birthDate}" th:disabled="${operation} == delete" type="text" name="birthDate"/>
-    <label>
-        <b>Sexo:</b>
-    </label>
-    <input th:value="${runner?.sex}" th:disabled="${operation} == delete" type="text" name="sex"/>
-
-    <input type="submit" th:value="${botaoOperacao}"/>
+<h1 th:text="${tittle}"> Operação </h1>
+<form th:object="${runner}" method="post">
+    <table border="1">
+        <tr>
+            <td>Nome:</td>
+            <td><input th:value="${runner?.name}" type="text" name="name" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Apelido:</td>
+            <td><input th:value="${runner?.nickname}" type="text" name="nickname" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td><input th:value="${runner?.email}" type="text" name="email" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Senha:</td>
+            <td><input th:value="${runner?.password}" type="text" name="password" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Confirmar senha:</td>
+            <td><input th:value="${runner?.confirmPassword}" type="text" name="confirmPassword" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>CPF:</td>
+            <td><input th:value="${runner?.cpf}" type="text" name="cpf" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>RG:</td>
+            <td><input th:value="${runner?.rg}" type="text" name="rg" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Data de nascimento:</td>
+            <td><input th:value="${runner?.birthDate}" type="text" name="birthDate" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Sexo:</td>
+            <td><input th:value="${runner?.sex}" type="text" name="sex" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Avatar:</td>
+            <td><input th:value="${runner?.avatar}" placeholder="http://images6.fanpop.com/image/photos/35300000/Flash-Icon-the-flash-35304507-200-200.png" type="image" name="avatar" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+        </tr>
+    </table>
 </form>
-
 </body>
 </html>

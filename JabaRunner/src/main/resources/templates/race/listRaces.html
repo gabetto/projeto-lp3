@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Corridas</title>
+</head>
+<body>
+<h1>Lista de Corridas</h1>
+
+<table border="1" th:if="${!races.isEmpty()}">
+    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr th:each="race : ${races}">
+        <td th:text="${race.name}">Nome</td>
+        <td th:text="${race.data}">Data</td>
+        <td th:text="${race.maxSubscribes}">Máximo de inscritos</td>
+        <td><a th:href="@{'/race/edit/' + ${race.id}}" >Editar</a></td>
+        <td><a th:href="@{'/race/delete/' + ${race.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!races.isEmpty()}">Sem Corridas</h2>
+
+<a th:href="@{'~/race/add/'}">Adicionar</a>
+</body>
+</html>

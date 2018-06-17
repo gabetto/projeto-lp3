@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Corrida</title>
+</head>
+<body>
+
+<h1 th:text="${tittle}"> Operação </h1>
+<form th:object="${race}" method="post">
+    <table border="1">
+        <tr>
+            <td>Nome:</td>
+            <td><input th:value="${race?.name}" type="text" name="name" th:disabled="${operation} == excluir"/><br>
+        </tr>
+        <tr>
+            <td>Data:</td>
+            <td><input th:value="${race?.data}" type="text" name="data" th:disabled="${operation} == excluir"/><br>
+        </tr>
+        <tr>
+            <td>Valor:</td>
+            <td><input th:value="${race?.value}" type="text" name="value" th:disabled="${operation} == excluir"/><br>
+        </tr>
+        <tr>
+            <td>Máximo de inscritos:</td>
+            <td><input th:value="${race?.maxSubscribes}"type="text" name="maxSubscribes" th:disabled="${operation} == excluir"/><br>
+        </tr>
+
+        <tr>
+            <td>Kilometragem:</td>
+            <td><input th:value="${race?.maxLength}" type="text" name="maxLength" th:disabled="${operation} == excluir"/><br>
+        </tr>
+
+        <tr>
+            <td>Organizador:</td>
+            <td><input th:value="${race?.organizer}" type="text" name="organizer" th:disabled="${operation} == excluir"/><br>
+        </tr>
+
+        <tr>
+            <td>Tipo de chip:</td>
+        <td><select th:value="${race?.tipoChip}" name="tipoChip" th:disabled="${operation} == excluir">
+            <option value="retornavel">Retornável</option>
+            <option value="descartavel">Descartável</option>
+        </select></td>
+        </tr>
+        <tr>
+            <td>Descrição:</td>
+            <td><input th:value="${race?.descricao}" type="text" name="descricao" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Cidade:</td>
+            <td><input th:value="${race?.city}" type="text" name="city" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Estado:</td>
+            <td><input th:value="${race?.state}" type="text" name="state" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Região:</td>
+            <td><input th:value="${race?.region}" type="text" name="regiao" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Hora inicial:</td>
+            <td><input th:value="${race?.initialHour}" type="text" name="initialHour" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+
+        <tr>
+            <td>Cor:</td>
+            <td><input th:value="${race?.cor}" type="color" name="cor" th:disabled="${operation} == excluir"></td>
+        </tr>
+
+        <tr>
+            <td>Hora final:</td>
+            <td><input th:value="${race?.finalHour}" type="text" name="finalHour" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+
+        <tr>
+            <td>Cep de largada:</td>
+            <td><input th:value="${race?.startCep}" type="text" name="startCep" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Descrição largada:</td>
+            <td><input th:value="${race?.descricaoLargada}" type="text" name="descricaoLargada" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Cep de chegada:</td>
+            <td><input th:value="vfinalCep}" type="text" name="finalCep" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Descrição chegada:</td>
+            <td><input th:value="${race?.descricaoChegada}" type="text" name="descricaoChegada" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Data de retirada do kit:</td>
+            <td><input th:value="${race?.dataRetiradaKit}" type="text" name="dataRetiradaKit" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Percurso</td>
+            <td>
+                <select th:disabled="${operation} == excluir" name="route">
+                    <option th:if="${race?.route} == null" th:each="route : ${routes}" th:value="${route.id}"  th:text="${route.name}"></option>
+                    <option th:if="${race?.route} != null" th:each="route : ${routes}" th:value="${route.id}" th:selected="${race.route.id} == ${route.id}" th:text="${route.name}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

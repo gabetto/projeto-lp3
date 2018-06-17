@@ -21,8 +21,8 @@ public class RunnerController {
     @GetMapping
     public String runners(Model model) {
         model.addAttribute("tittle", "Lista de corredores");
-        model.addAttribute("runner", runnerRepository.findAll());
-        return "runner/listRunners";
+        model.addAttribute("runners", runnerRepository.findAll());
+        return "runner/listRunner";
     }
 
     @GetMapping(value = "/add")
