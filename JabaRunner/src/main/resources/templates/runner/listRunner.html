@@ -10,14 +10,14 @@
     </h1>
 
     <table>
-        <tr th:each="Corredor : ${runners}">
+        <tr th:each="runner : ${runner}">
             <td th:text="${runner.name}">nome</td>
             <td th:text="${runner.email}">Email</td>
             <td><a th:href="@{'/runner/edit/' + ${runner.id}}">Editar</a></td>
             <td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
         </tr>
     </table>
-    <h2 th:unless="${!chips.isEmpty()}">Sem corredores</h2>
+    <h2 th:unless="${!runner.isEmpty()}">Sem corredores</h2>
 
     <a th:href="@{~/runner/add}">Adicionar</a>
 

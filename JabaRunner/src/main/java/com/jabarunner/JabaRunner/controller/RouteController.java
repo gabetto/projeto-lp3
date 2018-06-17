@@ -19,35 +19,36 @@ public class RouteController {
     @GetMapping(value = "")
     public String route(Model model){
         model.addAttribute("route", routeRepository.findAll());
-        return "routes";
+        return "route/listRoutes";
     }
 
     @GetMapping(value = "add")
     public String getRouteAdd(Model model){
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar rota");
-        return("routes");
+        model.addAttribute("botaoOperacao", "Adicionar rota");
+        return "route/formRoute";
     }
 
     @PostMapping(value = "add")
     public String postRouteAdd(Model model, @ModelAttribute Route route){
-        model.addAttribute("tittle", "Adicionar rota");
         routeRepository.save(route);
-        return "redirect:/routes";
+        return "redirect:/route";
     }
 
-    @GetMapping(value = "edit/{id}")
+    @GetMapping(value = "/edit/{id}")
     public String getRouteEdit(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar rota");
+        model.addAttribute("botaoOperacao", "Editar rota");
         Optional<Route> route = routeRepository.findById(id);
         if (route.isPresent()){
             model.addAttribute("route", route.get());
         }
-        return "routes";
+        return "route/formRoute";
     }
 
-    @PostMapping(value = "edit/{id}")
+    @PostMapping(value = "/edit/{id}")
     public String postRouteEdit(@ModelAttribute Route route, Model model,
                               @PathVariable Long id) throws Exception {
         if (id.equals(route.getId())) {
@@ -62,11 +63,12 @@ public class RouteController {
     public String getRunDelete(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir rota");
+        model.addAttribute("botaoOperacao", "Excluir rota");
         Optional<Route> route = routeRepository.findById(id);
         if (route.isPresent()) {
-            model.addAttribute("race", route.get());
+            model.addAttribute("route", route.get());
         }
-        return "routes";
+        return "route/formRoute";
     }
 
     @PostMapping(value = "delete/{id}")
