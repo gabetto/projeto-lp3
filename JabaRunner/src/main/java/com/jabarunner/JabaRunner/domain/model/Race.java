@@ -75,17 +75,16 @@ public class Race implements Serializable, ModelValidation<Race> {
     @Column(name = "data_retirada_kit", nullable = true, length = 15)
     private final String dataRetiradaKit;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "run")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "race")
 //    @JoinColumn(name = "corrida_id")
-    private final Collection<Route> routes;
-
+    private Collection<Route> routes;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corrida_id")
+//    @JoinColumn(name = "corrida_id")
     private final Collection<Kit> kits;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corrida_id")
+//    @JoinColumn(name = "corrida_id")
     private final Collection<Lot> lots;
-    @ManyToMany(mappedBy = "runs")
+    @ManyToMany(mappedBy = "races")
     private final Collection<Ranking> rankings;
 
     @Override
