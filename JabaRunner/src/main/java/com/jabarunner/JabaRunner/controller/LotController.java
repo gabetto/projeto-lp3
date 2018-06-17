@@ -21,38 +21,39 @@ public class LotController {
 
     @GetMapping(value = "")
     public String lot(Model model){
-        model.addAttribute("operation", "list");
         model.addAttribute("tittle","Lista de lotes");
         model.addAttribute("lot", lotRepository.findAll());
-        return "lots";
+        return "lot/listLots";
     }
 
-    @GetMapping(value = "add")
+    @GetMapping(value = "/add")
     public String getLotAdd(Model model){
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar lote");
-        return("lots");
+        model.addAttribute("botaoOperacao", "Adicionar lote");
+        return "lot/formLot";
     }
 
-    @PostMapping(value = "add")
+    @PostMapping(value = "/add")
     public String postLotAdd(Model model, @ModelAttribute Lot lot){
         model.addAttribute("tittle", "Adicionar lote");
         lotRepository.save(lot);
-        return "redirect:/lots";
+        return "redirect:/lot";
     }
 
-    @GetMapping(value = "edit/{id}")
+    @GetMapping(value = "/edit/{id}")
     public String getLotEdit(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar lote");
+        model.addAttribute("botaoOperacao", "Editar lote");
         Optional<Lot> lot = lotRepository.findById(id);
         if (lot.isPresent()){
             model.addAttribute("lot", lot.get());
         }
-        return "lots";
+        return "lot/formLot";
     }
 
-    @PostMapping(value = "edit/{id}")
+    @PostMapping(value = "/edit/{id}")
     public String postLotEdit(@ModelAttribute Lot lot, Model model,
                                 @PathVariable Long id) throws Exception {
         if (id.equals(lot.getId())) {
@@ -63,19 +64,20 @@ public class LotController {
         return "redirect:/lot";
     }
 
-    @GetMapping(value = "delete/{id}")
+    @GetMapping(value = "/delete/{id}")
     public String getLotDelete(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir lote");
+        model.addAttribute("botaoOperacao", "excluit lote");
         Optional<Lot> lot = lotRepository.findById(id);
         if (lot.isPresent()) {
-            model.addAttribute("race", lot.get());
+            model.addAttribute("lot", lot.get());
         }
 
-        return "lots";
+        return "lot/formLot";
     }
 
-    @PostMapping(value = "delete/{id}")
+    @PostMapping(value = "/delete/{id}")
     public String postLotDelete(@PathVariable Long id, @ModelAttribute Lot lot) {
         lotRepository.delete(lot);
         return "redirect:/lot";
