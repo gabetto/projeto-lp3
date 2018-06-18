@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Regra</title>
+</head>
+<body>
+
+<h1 th:text="${tittle}"> Operação </h1>
+<form th:object="${rule}" method="post">
+    <table border="1">
+        <tr>
+            <td>Descrição:</td>
+            <td><input th:value="${rule?.description}" type="text" name="description" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

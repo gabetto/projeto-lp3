@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Administradores</title>
+</head>
+<body>
+<h1>Lista de Administradores</h1>
+
+<table border="1" th:if="${!administrators.isEmpty()}">
+    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr th:each="administrator : ${administrators}">
+        <td th:text="${administrator.name}">Nome</td>
+        <td th:text="${administrator.email}">E-mail</td>
+        <td th:text="${administrator.rg}">RG</td>
+        <td th:text="${administrator.cpf}">CPF</td>
+        <td th:text="${administrator.sex}">Sexo</td>
+        <td th:text="${administrator.birthDate}">Data de nascimento</td>
+        <td><a th:href="@{'/administrator/edit/' + ${administrator.id}}" >Editar</a></td>
+        <td><a th:href="@{'/administrator/delete/' + ${administrator.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2>
+
+<a th:href="@{'~/administrator/add/'}">Adicionar</a>
+</body>
+</html>
