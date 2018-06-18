@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ranking</title>
+</head>
+<body>
+
+<h1 th:text="${tittle}"> Operação </h1>
+<form th:object="${ranking}" method="post">
+    <table border="1">
+        <tr>
+            <td>Nome:</td>
+            <td><input th:value="${ranking?.nomeRanking}" type="text" name="nomeRanking" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Organizador:</td>
+            <td><input th:value="${ranking?.organizador}" type="text" name="organizador" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Cidade:</td>
+            <td><input th:value="${ranking?.cidade}" type="text" name="cidade" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Estado:</td>
+            <td><input th:value="${ranking?.estado}" type="text" name="estado" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Região:</td>
+            <td><input th:value="${ranking?.regiao}" type="text" name="regiao" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Idade mínima:</td>
+            <td><input th:value="${ranking?.idadeInicial}" type="text" name="idadeInicial" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Idade máxima:</td>
+            <td><input th:value="${ranking?.idadeFinal}" type="text" name="idadeFinal" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

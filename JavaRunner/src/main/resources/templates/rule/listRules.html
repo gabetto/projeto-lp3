@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Regras</title>
+</head>
+<body>
+<h1>Lista de Regras</h1>
+
+<table border="1" th:if="${!rules.isEmpty()}">
+    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr th:each="rule : ${rules}">
+        <td th:text="${rule.description}">Descrição</td>
+        <td><a th:href="@{'/rule/edit/' + ${rule.id}}" >Editar</a></td>
+        <td><a th:href="@{'/rule/delete/' + ${rule.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!rules.isEmpty()}">Sem Regras</h2>
+
+<a th:href="@{'~/rule/add/'}">Adicionar</a>
+</body>
+</html>
