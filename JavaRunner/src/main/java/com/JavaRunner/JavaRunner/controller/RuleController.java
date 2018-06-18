@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "rule")
-public class RuleController {
+public class    RuleController {
 
     @Autowired
     RuleRepository ruleRepository;
@@ -19,7 +19,7 @@ public class RuleController {
     @GetMapping(value = "")
     public String rule(Model model){
         model.addAttribute("tittle","Lista de regras");
-        model.addAttribute("rule", ruleRepository.findAll());
+        model.addAttribute("rules", ruleRepository.findAll());
         return "rule/listRule";
     }
 
@@ -33,7 +33,6 @@ public class RuleController {
 
     @PostMapping(value = "/add")
     public String postAdd(Model model, @ModelAttribute Rule rule){
-        model.addAttribute("tittle", "Adicionar rule");
         ruleRepository.save(rule);
         return "redirect:/rule";
     }

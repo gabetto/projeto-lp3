@@ -12,30 +12,20 @@ import java.util.Collection;
 @Data
 @Accessors(chain = true)
 public class Kit implements Serializable, ModelValidation<Kit> {
-
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Basic
     @Column(name = "tipo", nullable = false, length = 64)
     private String tipo;
-
-    @Basic
     @Column(name = "nome", nullable = false, length = 64)
     private String nome;
-
-    @Basic
     @Column(name = "descricao", nullable = true, length = 1024)
     private String descricao;
-
-    @Basic
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Race.class)
     private Race race;
-
-    @OneToMany(mappedBy = "kit")
+    @OneToMany(mappedBy = "kit", targetEntity = Product.class)
     private Collection<Product> products;
-
     @Override
     public Kit validate() throws Exception {
         return null;

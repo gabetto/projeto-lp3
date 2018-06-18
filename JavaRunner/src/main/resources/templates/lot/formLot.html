@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lote</title>
+</head>
+<body>
+
+<h1 th:text="${tittle}"> Operação </h1>
+<form th:object="${lot}" method="post">
+    <table border="1">
+        <tr>
+            <td>Data inicial:</td>
+            <td><input th:value="${lot?.dataInicial}" type="text" name="dataInicial"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Data final:</td>
+            <td><input th:value="${lot?.dataFinal}" type="text" name="dataFinal" th:disabled="${operation} == excluir"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Desconto:</td>
+            <td><input th:value="${lot?.desconto}" type="text" name="desconto" th:disabled="${operation} == excluir"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Corrida:</td>
+            <td>
+                <select th:disabled="${operation} == excluir" name="route">
+                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" th:value="${corrida.id}"
+                            th:text="${corrida.name}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

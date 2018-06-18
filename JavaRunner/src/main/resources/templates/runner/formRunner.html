@@ -11,43 +11,43 @@
     <table border="1">
         <tr>
             <td>Nome:</td>
-            <td><input th:value="${runner?.name}" type="text" name="name" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.name}" type="text" name="name" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Apelido:</td>
-            <td><input th:value="${runner?.nickname}" type="text" name="nickname" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.nickname}" type="text" name="nickname" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>E-mail:</td>
-            <td><input th:value="${runner?.email}" type="text" name="email" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.email}" type="text" name="email" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Senha:</td>
-            <td><input th:value="${runner?.password}" type="text" name="password" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.password}" type="text" name="password" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Confirmar senha:</td>
-            <td><input th:value="${runner?.confirmPassword}" type="text" name="confirmPassword" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.confirmPassword}" type="text" name="confirmPassword" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>CPF:</td>
-            <td><input th:value="${runner?.cpf}" type="text" name="cpf" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.cpf}" type="text" name="cpf" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>RG:</td>
-            <td><input th:value="${runner?.rg}" type="text" name="rg" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.rg}" type="text" name="rg" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Data de nascimento:</td>
-            <td><input th:value="${runner?.birthDate}" type="text" name="birthDate" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.birthDate}" type="text" name="birthDate" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Sexo:</td>
-            <td><input th:value="${runner?.sex}" type="text" name="sex" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.sex}" type="text" name="sex" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Avatar:</td>
-            <td><input th:value="${runner?.avatar}" placeholder="http://images6.fanpop.com/image/photos/35300000/Flash-Icon-the-flash-35304507-200-200.png" type="image" name="avatar" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${runner?.avatar}" placeholder="http://images6.fanpop.com/image/photos/35300000/Flash-Icon-the-flash-35304507-200-200.png" type="text" required name="avatar" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>

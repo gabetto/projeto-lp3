@@ -20,7 +20,7 @@ public class RaceController {
     public String race(Model model){
         model.addAttribute("tittle", "Lista de corridas");
         model.addAttribute("races", raceRepository.findAll());
-        return "race/listRaces";
+        return "race/listRace";
     }
 
     @GetMapping(value = "add")
@@ -43,9 +43,9 @@ public class RaceController {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar corrida");
         model.addAttribute("botaoOperacao", "Editar corrida");
-        Optional<Race> run = raceRepository.findById(id);
-        if (run.isPresent()){
-            model.addAttribute("race", run.get());
+        Optional<Race> race = raceRepository.findById(id);
+        if (race.isPresent()){
+            model.addAttribute("race", race.get());
         }
         return "race/formRace";
     }

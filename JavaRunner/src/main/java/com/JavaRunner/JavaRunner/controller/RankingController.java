@@ -19,7 +19,7 @@ public class RankingController {
     @GetMapping(value = "")
     public String ranking(Model model){
         model.addAttribute("tittle","Lista de rankings");
-        model.addAttribute("ranking", rankingRepository.findAll());
+        model.addAttribute("rankings", rankingRepository.findAll());
         return "ranking/listRanking";
     }
 

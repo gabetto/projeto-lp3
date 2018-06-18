@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "administrador")
 public class Administrator implements ModelValidation<Administrator> {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
     @Basic
     @Column(name = "login", nullable = false, length = 64)
@@ -51,13 +51,7 @@ public class Administrator implements ModelValidation<Administrator> {
     @Column(name = "data_nascimento", nullable = false, length = 20)
     private String birthDate;
     @Column(insertable = false, updatable = false)
-    @NotNull
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String confirmPassword;
-
     public Administrator validate() throws Exception {
-        if (!Validations.passwordEquals(this.getPassword(), this.getConfirmPassword())) throw new PasswordException();
         if (Validations.beforeThanToday(this.getBirthDate())) throw new BeforeDateException();
         if (!RegexFilters.isValidEmail(this.getEmail())) throw new EmailException();
         if (!Validations.isValidCpf(this.getCpf())) throw new CpfException();
@@ -66,7 +60,6 @@ public class Administrator implements ModelValidation<Administrator> {
                 .setName(Capitalize.brazilianCapitalize(this.getName()))
                 .setBirthDate(this.getBirthDate())
                 .setPassword(this.getPassword())
-                .setConfirmPassword(this.getConfirmPassword())
                 .setCpf(this.getCpf())
                 .setRg(this.getRg())
                 .setLogin(this.getLogin())

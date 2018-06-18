@@ -8,7 +8,7 @@
 <h1>Lista de Regras</h1>
 
 <table border="1" th:if="${!rules.isEmpty()}">
-    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr><td>Regra</td><td colspan="2">Acao</td></tr>
     <tr th:each="rule : ${rules}">
         <td th:text="${rule.description}">Descrição</td>
         <td><a th:href="@{'/rule/edit/' + ${rule.id}}" >Editar</a></td>

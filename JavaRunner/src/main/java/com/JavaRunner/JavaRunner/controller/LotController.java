@@ -3,27 +3,29 @@ package com.JavaRunner.JavaRunner.controller;
 
 import com.JavaRunner.JavaRunner.domain.model.Lot;
 import com.JavaRunner.JavaRunner.domain.repository.LotRepository;
+import com.JavaRunner.JavaRunner.domain.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @Controller
+@RequestMapping(value = "lot")
 public class LotController {
 
     @Autowired
     LotRepository lotRepository;
 
+    @Autowired
+    RaceRepository raceRepository;
+
     @GetMapping(value = "")
     public String lot(Model model){
         model.addAttribute("tittle","Lista de lotes");
-        model.addAttribute("lot", lotRepository.findAll());
-        return "lot/listLots";
+        model.addAttribute("lots", lotRepository.findAll());
+        return "lot/listLot";
     }
 
     @GetMapping(value = "/add")
@@ -31,6 +33,7 @@ public class LotController {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar lote");
         model.addAttribute("botaoOperacao", "Adicionar lote");
+        model.addAttribute("corridas",raceRepository.findAll());
         return "lot/formLot";
     }
 

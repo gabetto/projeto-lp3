@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name = "percurso")
 public class Route implements Serializable, ModelValidation<Route> {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
     @Column(name = "nome", nullable = false, length = 64)
     private String name;
@@ -21,9 +21,9 @@ public class Route implements Serializable, ModelValidation<Route> {
     private Double maxLength;
     @Column(name = "descricao", nullable = false, length = 1024)
     private String description;
-    @Column(name = "cep_largada", nullable = false, length = 9)
+    @Column(name = "cep_largada", nullable = false, length = 20)
     private String startCep;
-    @Column(name = "cep_chegada", nullable = false, length = 9)
+    @Column(name = "cep_chegada", nullable = false, length = 20)
     private String finalCep;
     @Column(name = "info_chegada", nullable = true, length = 1024)
     private String finalInfo;
@@ -31,9 +31,10 @@ public class Route implements Serializable, ModelValidation<Route> {
     private String startInfo;
     @Column(name = "pontuado", nullable = true, precision = 0)
     private Double points;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Race race;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "corrida_id")
+    private Race race;
     @Override
     public Route validate() throws Exception {
         return null;

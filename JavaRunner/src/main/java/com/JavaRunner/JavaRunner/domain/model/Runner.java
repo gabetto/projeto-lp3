@@ -70,7 +70,6 @@ public class Runner implements Serializable, ModelValidation<Runner> {
         if (Validations.beforeThanToday(this.getBirthDate())) throw new BeforeDateException();
         if (!RegexFilters.isValidEmail(this.getEmail())) throw new EmailException();
         if (!Validations.isValidCpf(this.getCpf())) throw new CpfException();
-
         return new Runner()
                 .setAvatar(getAvatar())
                 .setBirthDate(getBirthDate())

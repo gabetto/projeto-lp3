@@ -38,6 +38,19 @@
             <td><input th:value="${route?.points}" type="text" name="points" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
+            <td>Descrição:</td>
+            <td><input th:value="${route?.description}" type="text" name="description" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Corrida:</td>
+            <td>
+                <select th:disabled="${operation} == excluir" name="route">
+                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" th:value="${corrida.id}"
+                            th:text="${corrida.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
         </tr>
     </table>

@@ -2,6 +2,7 @@ package com.JavaRunner.JavaRunner.controller;
 
 import com.JavaRunner.JavaRunner.domain.model.Kit;
 import com.JavaRunner.JavaRunner.domain.repository.KitRepository;
+import com.JavaRunner.JavaRunner.domain.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,14 @@ public class KitController {
     @Autowired
     KitRepository kitRepository;
 
+    @Autowired
+    RaceRepository raceRepository;
+
     @GetMapping(value = "")
     public String kit(Model model){
         model.addAttribute("tittle","Lista de kits");
-        model.addAttribute("kit", kitRepository.findAll());
-        return "kit/listKits";
+        model.addAttribute("kits", kitRepository.findAll());
+        return "kit/listKit";
     }
 
     @GetMapping(value = "/add")
@@ -28,6 +32,7 @@ public class KitController {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar kit");
         model.addAttribute("botaoOperacao", "Adicionar kit");
+        model.addAttribute("corridas",raceRepository.findAll());
         return "kit/formKit";
     }
 

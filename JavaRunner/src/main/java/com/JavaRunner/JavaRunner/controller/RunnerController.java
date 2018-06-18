@@ -29,7 +29,8 @@ public class RunnerController {
     public String getRunnersAdd(Model model) {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar corredor");
-        return "runner/formRunners";
+        model.addAttribute("botaoOperacao", "Adicionar corredor");
+        return "runner/formRunner";
     }
 
     @PostMapping(value = "/add")
@@ -42,11 +43,12 @@ public class RunnerController {
     public String getRunnerEdit(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar corredor");
+        model.addAttribute("botaoOperacao", "Editar corredor");
         Optional<Runner> runner = runnerRepository.findById(id);
         if (runner.isPresent()) {
             model.addAttribute("runner", runner.get());
         }
-        return "runner/formRunners";
+        return "runner/formRunner";
     }
 
     @PostMapping(value = "edit/{id}")
@@ -71,7 +73,7 @@ public class RunnerController {
             model.addAttribute("botaoOperacao", "Deletar corredor");
         }
 
-        return "runner/runners.html";
+        return "runner/formRunner";
     }
 
     @PostMapping(value = "delete/{id}")

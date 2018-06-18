@@ -1,6 +1,7 @@
 package com.JavaRunner.JavaRunner.controller;
 
 import com.JavaRunner.JavaRunner.domain.model.Route;
+import com.JavaRunner.JavaRunner.domain.repository.RaceRepository;
 import com.JavaRunner.JavaRunner.domain.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,13 @@ public class RouteController {
     @Autowired
     RouteRepository routeRepository;
 
+    @Autowired
+    RaceRepository raceRepository;
+
     @GetMapping(value = "")
     public String route(Model model){
-        model.addAttribute("route", routeRepository.findAll());
-        return "route/listRoutes";
+        model.addAttribute("routes", routeRepository.findAll());
+        return "route/listRoute";
     }
 
     @GetMapping(value = "add")
@@ -27,6 +31,7 @@ public class RouteController {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar rota");
         model.addAttribute("botaoOperacao", "Adicionar rota");
+        model.addAttribute("corridas", raceRepository.findAll());
         return "route/formRoute";
     }
 

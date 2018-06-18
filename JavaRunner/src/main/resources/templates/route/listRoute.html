@@ -8,16 +8,11 @@
 <h1>Lista de Percursos</h1>
 
 <table border="1" th:if="${!routes.isEmpty()}">
-    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr><td>Nome</td><td>Distancia</td><td>Descricao</td><td colspan="2">Acao</td></tr>
     <tr th:each="route : ${routes}">
         <td th:text="${route.name}">Nome</td>
         <td th:text="${route.maxLength}">Quilometragem máxima</td>
         <td th:text="${route.description}">Descrição</td>
-        <td th:text="${route.startlCep}">CEP da Largada</td>
-        <td th:text="${route.startInfo}">Informações da Largada</td>
-        <td th:text="${route.finalCep}">CEP da Chegada</td>
-        <td th:text="${route.finalInfo}">Descrição da Cheada</td>
-        <td th:text="${route.points}">Pontuação máxima</td>
         <td><a th:href="@{'/route/edit/' + ${route.id}}" >Editar</a></td>
         <td><a th:href="@{'/route/delete/' + ${route.id}}">Excluir</a></td>
     </tr>

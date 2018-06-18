@@ -13,26 +13,21 @@ import java.io.Serializable;
 @Table(name = "produto")
 public class Product implements Serializable, ModelValidation<Product> {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Integer id;
-    @Basic
     @Column(name = "nome", nullable = false, length = 64)
     private String nome;
-    @Basic
     @Column(name = "descricao", nullable = false, length = 1024)
     private String descricao;
-    @Basic
     @Column(name = "preco", nullable = false, precision = 0)
     private Double preco;
-    @Basic
     @Column(name = "estoque", nullable = false)
     private Integer estoque;
-    @Basic
     @Column(name = "info_adicional", nullable = true, length = 1024)
     private String infoAdicional;
     @ManyToOne
+    @JoinColumn(name = "kit_id")
     private Kit kit;
-
     @Override
     public Product validate() throws Exception {
         return null;

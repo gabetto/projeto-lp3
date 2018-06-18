@@ -8,15 +8,11 @@
 <h1>Lista de Rankings</h1>
 
 <table border="1" th:if="${!rankings.isEmpty()}">
-    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+    <tr><td>Nome</td><td>Organizador</td><td>Cidade</td><td colspan="2">Acao</td></tr>
     <tr th:each="ranking : ${rankings}">
         <td th:text="${ranking.nomeRanking}">Nome</td>
         <td th:text="${ranking.organizador}">Organizador</td>
         <td th:text="${ranking.cidade}">Cidade</td>
-        <td th:text="${ranking.estado}">Estado</td>
-        <td th:text="${ranking.regiao}">Regiao</td>
-        <td th:text="${ranking.idadeInicial}">Idade mínima</td>
-        <td th:text="${ranking.idadeFinal}">Idade máxima</td>
         <td><a th:href="@{'/ranking/edit/' + ${ranking.id}}" >Editar</a></td>
         <td><a th:href="@{'/ranking/delete/' + ${ranking.id}}">Excluir</a></td>
     </tr>

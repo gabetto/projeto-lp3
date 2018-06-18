@@ -10,7 +10,6 @@
     </h1>
 
     <table>
-<<<<<<< HEAD
         <tr th:each="runner : ${runners}">
             <td th:text="${runner.name}">nome</td>
             <td th:text="${runner.email}">Email</td>
@@ -22,16 +21,5 @@
 
     <a th:href="@{~/runner/add}">Adicionar</a>
 
-=======
-        <!--<tr th:each="Corredor : ${runners}">-->
-            <!--<td th:text="${runner.name}">nome</td>-->
-            <!--<td th:text="${runner.email}">Email</td>-->
-            <!--<td><a th:href="@{'/runner/edit/' + ${runner.id}}">Editar</a></td>-->
-            <!--<td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>-->
-        <!--</tr>-->
-    </table>
-    <!--<h2 th:unless="${!chips.isEmpty()}">Sem corredores</h2>-->
-    <!--<a th:href="@{~/runner/add}">Adicionar</a>-->
->>>>>>> 030d31de46a0ab75a6663ac97115b599a2d51f67
 </body>
 </html>

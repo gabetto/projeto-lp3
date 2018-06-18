@@ -24,6 +24,15 @@
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
         </tr>
+        <tr>
+            <td>Corrida:</td>
+            <td>
+                <select th:disabled="${operation} == excluir" name="route">
+                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" th:value="${corrida.id}"
+                            th:text="${corrida.name}"></option>
+                </select>
+            </td>
+        </tr>
     </table>
 </form>
 </body>

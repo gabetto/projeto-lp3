@@ -22,6 +22,6 @@ public class Lot {
     @Basic
     @Column(name = "desconto", nullable = false, precision = 0)
     private Double desconto;
-    @ManyToOne
+    @ManyToOne(targetEntity = Race.class)
     private Race race;
 }
