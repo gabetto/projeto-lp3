@@ -3,56 +3,95 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Corredor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<h1 th:text="${tittle}"> Operação </h1>
-<form th:object="${runner}" method="post">
-    <table border="1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="administrator">Administradores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/runner/">Corredores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/race/">Corridas<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/kit/">Kits<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/lot/">Lotes<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/product/">Produtos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/ranking/">Rankings<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/route/">Percursos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/rule/">Regras<span class="sr-only">(current)</span></a>
+            </li>
+
+    </div>
+</nav>
+<center><h1 th:text="${tittle}"> Operação </h1></center>
+<center><form th:object="${runner}" method="post">
+    <table>
         <tr>
             <td>Nome:</td>
-            <td><input required th:value="${runner?.name}" type="text" name="name" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Apelido:</td>
-            <td><input required th:value="${runner?.nickname}" type="text" name="nickname" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.nickname}" type="text" name="nickname" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>E-mail:</td>
-            <td><input required th:value="${runner?.email}" type="text" name="email" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.email}" type="text" name="email" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Senha:</td>
-            <td><input required th:value="${runner?.password}" type="text" name="password" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.password}" type="text" name="password" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Confirmar senha:</td>
-            <td><input required th:value="${runner?.confirmPassword}" type="text" name="confirmPassword" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.confirmPassword}" type="text" name="confirmPassword" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>CPF:</td>
-            <td><input required th:value="${runner?.cpf}" type="text" name="cpf" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.cpf}" type="text" name="cpf" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>RG:</td>
-            <td><input required th:value="${runner?.rg}" type="text" name="rg" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.rg}" type="text" name="rg" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Data de nascimento:</td>
-            <td><input required th:value="${runner?.birthDate}" type="text" name="birthDate" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.birthDate}" type="text" name="birthDate" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Sexo:</td>
-            <td><input required th:value="${runner?.sex}" type="text" name="sex" th:disabled="${operation} == excluir"/></td>
+            <td><input required th:value="${runner?.sex}" type="text" name="sex" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Avatar:</td>
-            <td><input th:value="${runner?.avatar}" placeholder="http://images6.fanpop.com/image/photos/35300000/Flash-Icon-the-flash-35304507-200-200.png" type="text" required name="avatar" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${runner?.avatar}" placeholder="http://images6.fanpop.com/image/photos/35300000/Flash-Icon-the-flash-35304507-200-200.png" type="text" required name="avatar" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
+            <td><a href="/runner/">Voltar</a></td>
         </tr>
     </table>
-</form>
+</form></center>
 </body>
 </html>

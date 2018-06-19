@@ -3,52 +3,91 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Administrador</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<h1 th:text="${tittle}"> Operação </h1>
-<form th:object="${administrator}" method="post">
-    <table border="1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/administrator/">Administradores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/runner/">Corredores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/race/">Corridas<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/kit/">Kits<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/lot/">Lotes<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/product/">Produtos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/ranking/">Rankings<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/route/">Percursos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/rule/">Regras<span class="sr-only">(current)</span></a>
+            </li>
+
+    </div>
+</nav>
+<center><h1 th:text="${tittle}"> Operação </h1></center>
+<center><form th:object="${administrator}" method="post">
+    <table>
         <tr>
             <td>Nome completo:</td>
-            <td><input th:value="${administrator?.name}" type="text" name="name" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>E-mail:</td>
-            <td><input th:value="${administrator?.email}" type="text" name="email" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.email}" type="text" name="email" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>RG:</td>
-            <td><input th:value="${administrator?.rg}" type="text" name="rg" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.rg}" type="text" name="rg" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>CPF:</td>
-            <td><input th:value="${administrator?.cpf}" type="text" name="cpf" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.cpf}" type="text" name="cpf" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Sexo:</td>
-            <td><input th:value="${administrator?.sex}" type="text" name="sex" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.sex}" type="text" name="sex" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Data de nascimento:</td>
-            <td><input th:value="${administrator?.birthDate}" type="text" name="birthDate" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.birthDate}" type="text" name="birthDate" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Login:</td>
-            <td><input th:value="${administrator?.login}" type="text" name="login" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.login}" type="text" name="login" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Senha:</td>
-            <td><input th:value="${administrator?.password}" type="text" name="password" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.password}" type="text" name="password" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Autenticação secundária:</td>
-            <td><input th:value="${administrator?.secondaryAuth}" type="text" name="secondaryAuth" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.secondaryAuth}" type="text" name="secondaryAuth" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
+            <td><a href="/administrator/">Voltar</a></td>
         </tr>
     </table>
-</form>
+</form></center>
 </body>
 </html>

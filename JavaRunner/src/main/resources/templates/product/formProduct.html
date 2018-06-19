@@ -3,36 +3,75 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Produto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<h1 th:text="${tittle}"> Operação </h1>
-<form th:object="${product}" method="post">
-    <table border="1">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/administrator/">Administradores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/runner/">Corredores<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/race/">Corridas<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/kit/">Kits<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/lot/">Lotes<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/product/">Produtos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/ranking/">Rankings<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/route/">Percursos<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/rule/">Regras<span class="sr-only">(current)</span></a>
+            </li>
+
+    </div>
+</nav>
+<center><h1 th:text="${tittle}"> Operação </h1></center>
+<center><form th:object="${product}" method="post">
+    <table>
         <tr>
             <td>Nome:</td>
-            <td><input th:value="${product?.nome}" type="text" name="nome" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${product?.nome}" type="text" name="nome" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Descrição:</td>
-            <td><input th:value="${product?.descricao}" type="text" name="descricao" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${product?.descricao}" type="text" name="descricao" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Preço:</td>
-            <td><input th:value="${product?.preco}" type="text" name="preco" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${product?.preco}" type="text" name="preco" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Estoque:</td>
-            <td><input th:value="${product?.estoque}" type="text" name="estoque" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${product?.estoque}" type="text" name="estoque" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Informações adicionais:</td>
-            <td><input th:value="${product?.infoAdicional}" type="text" name="infoAdicional" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${product?.infoAdicional}" type="text" name="infoAdicional" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
+            <td><a href="/product/">Voltar</a></td>
         </tr>
     </table>
-</form>
+</form></center>
 </body>
 </html>

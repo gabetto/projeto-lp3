@@ -29,8 +29,8 @@ public class RouteController {
     @GetMapping(value = "add")
     public String getRouteAdd(Model model){
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar rota");
-        model.addAttribute("botaoOperacao", "Adicionar rota");
+        model.addAttribute("tittle", "Adicionar percurso");
+        model.addAttribute("botaoOperacao", "Adicionar percurso");
         model.addAttribute("corridas", raceRepository.findAll());
         return "route/formRoute";
     }
@@ -44,8 +44,8 @@ public class RouteController {
     @GetMapping(value = "/edit/{id}")
     public String getRouteEdit(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "edit");
-        model.addAttribute("title", "Editar rota");
-        model.addAttribute("botaoOperacao", "Editar rota");
+        model.addAttribute("title", "Editar percurso");
+        model.addAttribute("botaoOperacao", "Editar percurso");
         Optional<Route> route = routeRepository.findById(id);
         if (route.isPresent()){
             model.addAttribute("route", route.get());
@@ -67,8 +67,8 @@ public class RouteController {
     @GetMapping(value = "delete/{id}")
     public String getRunDelete(Model model, @PathVariable Long id) {
         model.addAttribute("operation", "delete");
-        model.addAttribute("tittle", "Excluir rota");
-        model.addAttribute("botaoOperacao", "Excluir rota");
+        model.addAttribute("tittle", "Excluir percurso");
+        model.addAttribute("botaoOperacao", "Excluir percurso");
         Optional<Route> route = routeRepository.findById(id);
         if (route.isPresent()) {
             model.addAttribute("route", route.get());
