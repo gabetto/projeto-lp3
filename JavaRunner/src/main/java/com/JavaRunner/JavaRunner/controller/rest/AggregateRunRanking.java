@@ -1,17 +1,17 @@
 package com.JavaRunner.JavaRunner.controller.rest;
 
-import com.JavaRunner.JavaRunner.domain.model.Race;
 import com.JavaRunner.JavaRunner.domain.repository.RaceRepository;
 import com.JavaRunner.JavaRunner.domain.repository.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 
-@RestController
-@RequestMapping(value = "/multiples")
+@Controller
+@RequestMapping(value = "/admin/api")
 public class AggregateRunRanking {
     @Autowired
     RaceRepository races;
@@ -26,20 +26,8 @@ public class AggregateRunRanking {
 //}
 
     @GetMapping
-    public Iterable<Race> all() {
-        return races.findAll();
-    }
-
-    @PostMapping
-    public ResponseEntity<?> tryCreate(@RequestBody Race race) {
-        HashMap<String, String> errors = race.findErrors();
-        Optional<Race> byName = races.findByName(race.getName());
-        if (byName.isPresent()) {
-            errors.put("exists", "Corrida já existe");
-        }
-        if (errors.isEmpty()) {
-            return ResponseEntity.ok(races.save(race.beautify()));
-        }
-        return ResponseEntity.status(500).body(errors);
+    public String all(HttpServletRequest request, Model model) {
+        model.addAttribute("hello", request.getAttribute("startTime"));
+        return "fodac";
     }
 }

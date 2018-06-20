@@ -37,15 +37,9 @@ public class AdministratorController {
     }
 
     @PostMapping(value = "/add")
-    public String postAdd(Model model, @ModelAttribute Administrator admin) {
+    public String postAdd(Model model, @ModelAttribute Administrator admin) throws Exception {
         model.addAttribute("title", "Adicionar administrador");
-        HashMap<String, String> errors = null;
-        try {
-            errors = admin.findErrors();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        HashMap<String, String> errors = admin.findErrors();
         if (errors.isEmpty()) {
             administratorRepository.save(admin.beautify());
             return "redirect:/admin";

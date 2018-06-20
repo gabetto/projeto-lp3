@@ -1,5 +1,6 @@
 package com.JavaRunner.JavaRunner.utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,4 +112,10 @@ public final class Capitalize {
                         "(" + REGEX_ALL_UPPER_CASE + "[" +
                         ALL_SPECIAL_LOWER_CASE + "\\d]+)", "$1" + replace + "$2");
     }
+
+
+    public static String fix(HttpServletRequest request, String newPath) {
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/" + newPath;
+    }
+
 }
