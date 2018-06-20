@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class AdminFilter extends HandlerInterceptorAdapter {
-    private static final Logger logger = LoggerFactory.getLogger(AdminFilter.class);
     @Autowired
     private AdministratorRepository repository;
 
@@ -25,24 +24,15 @@ public class AdminFilter extends HandlerInterceptorAdapter {
         try {
             return repository.existsById(((Administrator) admin).getId());
         } catch (Exception ignored) {
-            return false;
+            return true;
         }
     }
 
     @Override
-    public void postHandle(HttpServletRequest request,
-                           HttpServletResponse response, Object handler,
-                           ModelAndView modelAndView) {
-        System.out.println("Request URL::" + request.getRequestURL().toString() + " Sent to Handler :: Current Time=" + System.currentTimeMillis());
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request,
-                                HttpServletResponse response, Object handler, Exception ex) {
-        long startTime = (Long) request.getAttribute("startTime");
-        logger.info("Request URL::" + request.getRequestURL().toString()
-                + ":: End Time=" + System.currentTimeMillis());
-        logger.info("Request URL::" + request.getRequestURL().toString()
-                + ":: Time Taken=" + (System.currentTimeMillis() - startTime));
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
     }
 }
