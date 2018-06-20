@@ -1,69 +1,71 @@
 package com.JavaRunner.JavaRunner.domain.model;
 
 import com.JavaRunner.JavaRunner.utils.Capitalize;
-import com.JavaRunner.JavaRunner.utils.contracts.ModelValidation;
-import com.JavaRunner.JavaRunner.utils.exceptions.BeforeDateException;
-import com.JavaRunner.JavaRunner.utils.exceptions.CpfException;
-import com.JavaRunner.JavaRunner.utils.exceptions.EmailException;
-import com.JavaRunner.JavaRunner.utils.exceptions.PasswordException;
 import com.JavaRunner.JavaRunner.utils.validations.RegexFilters;
 import com.JavaRunner.JavaRunner.utils.validations.Validations;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.JavaRunner.JavaRunner.utils.validations.Validator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.HashMap;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Accessors(chain = true)
-@Table(name = "administrador")
-public class Administrator implements ModelValidation<Administrator> {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @Basic
-    @Column(name = "login", nullable = false, length = 64)
+@Table(name = "administrator")
+public class Administrator extends DatabaseCommons implements Validator<Administrator> {
+    @Column(nullable = false, length = 64)
     private String login;
-    @Basic
-    @Column(name = "autenticacao_secundaria", nullable = false, length = 64)
-    private String secondaryAuth;
-    @Basic
-    @Column(name = "nome_completo", nullable = false, length = 128)
+    @Column(nullable = false, length = 64)
+    private String callback;
+    @Column(nullable = false, length = 192)
     private String name;
-    @Basic
-    @Column(name = "email", nullable = false, length = 128)
+    @Column(nullable = false, length = 256)
     private String email;
-    @Basic
-    @Column(name = "rg", nullable = false, length = 18)
+    @Column(nullable = false, length = 18)
     private String rg;
-    @Basic
-    @Column(name = "cpf", nullable = false, length = 14)
+    @Column(nullable = false, length = 14)
     private String cpf;
-    @Basic
-    @Column(name = "sexo", nullable = false, length = 20)
+    @Column(nullable = false, length = 11)
     private String sex;
-    @Basic
-    @Column(name = "password", nullable = false, length = 60)
+    @Column(nullable = false, length = 64)
+    @JsonIgnore
     private String password;
-    @Basic
-    @Column(name = "data_nascimento", nullable = false, length = 20)
+    @Column(nullable = false, length = 20)
     private String birthDate;
-    @Column(insertable = false, updatable = false)
-    public Administrator validate() throws Exception {
-        if (Validations.beforeThanToday(this.getBirthDate())) throw new BeforeDateException();
-        if (!RegexFilters.isValidEmail(this.getEmail())) throw new EmailException();
-        if (!Validations.isValidCpf(this.getCpf())) throw new CpfException();
+
+    @Override
+    public HashMap<String, String> findErrors() throws Exception {
+        HashMap<String, String> errors = new HashMap<>();
+        if (Validations.beforeThanToday(this.getBirthDate())) {
+            errors.put("nascimento", "A data de nascimento deve ser anterior a hoje");
+        }
+        if (!RegexFilters.isValidEmail(this.getEmail())) {
+            errors.put("email", "Erro no padrão do email");
+        }
+        if (!Validations.isValidCpf(this.getCpf())) {
+            errors.put("cpf", "CPF inválido");
+        }
+        return errors;
+    }
+
+    @Override
+    public Administrator beautify() {
         return new Administrator()
-                .setEmail(this.getEmail())
-                .setName(Capitalize.brazilianCapitalize(this.getName()))
-                .setBirthDate(this.getBirthDate())
-                .setPassword(this.getPassword())
-                .setCpf(this.getCpf())
-                .setRg(this.getRg())
-                .setLogin(this.getLogin())
-                .setSecondaryAuth(this.getSecondaryAuth())
-                .setSex(this.getSex());
+                .setCpf(cpf)
+                .setEmail(email)
+                .setLogin(login)
+                .setSex(Capitalize.capitalizeByWords(sex))
+                .setBirthDate(birthDate)
+                .setRg(rg)
+                .setCallback(callback)
+                .setPassword(password)
+                .setName(Capitalize.brazilianCapitalize(name));
     }
 }

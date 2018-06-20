@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Component
-public interface RunnerRepository extends CrudRepository<Runner, Long> {
-    public Runner findByEmail(String email);
-    public Runner findByCpf(String cpf);
-    public Runner findByRg(String rg);
+public interface RunnerRepository extends CrudRepository<Runner, String> {
+    Runner findByEmail(String email);
+
+    Runner findByCpf(String cpf);
+
+    Runner findByRg(String rg);
 }

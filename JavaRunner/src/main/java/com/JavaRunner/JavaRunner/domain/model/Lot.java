@@ -1,27 +1,26 @@
 package com.JavaRunner.JavaRunner.domain.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Entity
 @Data
+@Entity
 @Accessors(chain = true)
-@Table(name = "lote")
-public class Lot {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
-    @Basic
-    @Column(name = "data_inicial", nullable = false, length = 20)
-    private String dataInicial;
-    @Basic
-    @Column(name = "data_final", nullable = false, length = 20)
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "lots")
+public class Lot extends DatabaseCommons {
+    @Column(nullable = false, length = 20)
+    private String initialData;
+    @Column(nullable = false, length = 20)
     private String dataFinal;
-    @Basic
-    @Column(name = "desconto", nullable = false, precision = 0)
-    private Double desconto;
+    @Column(nullable = false, precision = 2)
+    private Double discount;
     @ManyToOne(targetEntity = Race.class)
     private Race race;
 }

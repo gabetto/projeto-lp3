@@ -10,4 +10,5 @@ public class JavaRunnerApplication {
     public static void main(String[] args) {
         SpringApplication.run(JavaRunnerApplication.class, args);
     }
+
 }

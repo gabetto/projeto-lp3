@@ -1,0 +1,139 @@
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<h1 th:text="${title}">Operação</h1>
+<form th:object="${race}" method="post">
+    <table>
+        <tr>
+            <td>Nome:</td>
+            <td><input th:value="${race?.name}" name="name" class="form-control" th:disabled="${operation} == excluir"/>
+        </tr>
+        <tr>
+            <td>Data:</td>
+            <td><input th:value="${race?.data}" data-toggle="datepicker" name="data" class="form-control"
+                       th:disabled="${operation} == excluir" data-mask="00/00/0000"/>
+        </tr>
+        <tr>
+            <td>Valor:</td>
+            <td><input th:value="${race?.price}" type="text" name="price" class="form-control"
+                       th:disabled="${operation} == excluir"/>
+        </tr>
+        <tr>
+            <td>Máximo de inscritos:</td>
+            <td><input th:value="${race?.subscribes}" type="text" name="subscribes"
+                       class="form-control" th:disabled="${operation} == excluir"/>
+        </tr>
+
+        <tr>
+            <td>Kilometragem:</td>
+            <td><input th:value="${race?.length}" type="text" name="length"
+                       class="form-control" th:disabled="${operation} == excluir"/>
+        </tr>
+
+        <tr>
+            <td>Organizador:</td>
+            <td><input th:value="${race?.organizer}" type="text" name="organizer"
+                       class="form-control" th:disabled="${operation} == excluir"/>
+        </tr>
+
+        <tr>
+            <td>Tipo de chip:</td>
+            <td><select th:value="${race?.chip}" name="chip" class="form-control"
+                        th:disabled="${operation} == excluir">
+                <option value="retornavel">Retornável</option>
+                <option value="descartavel">Descartável</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Descrição:</td>
+            <td><input th:value="${race?.description}" type="text" name="description"
+                       class="form-control" th:disabled="${operation} == excluir"/><br></td>
+        </tr>
+        <tr>
+            <td>Cidade:</td>
+            <td><input th:value="${race?.city}" type="text" name="city" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Estado:</td>
+            <td><input th:value="${race?.state}" type="text" name="state" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Região:</td>
+            <td><input th:value="${race?.region}" type="text" name="region" class="form-control"
+                       th:disabled="${operation} == excluir"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Hora inicial:</td>
+            <td>
+                <input th:value="${race?.initialHour}" type="text" name="initialHour"
+                       data-mask="00:00" class="form-control" th:disabled="${operation} == excluir"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Cor:</td>
+            <td><input th:value="${race?.color}" type="color" name="color" class="form-control"
+                       th:disabled="${operation} == excluir"></td>
+        </tr>
+
+        <tr>
+            <td>Hora final:</td>
+            <td>
+                <input th:value="${race?.finalHour}" type="text" name="finalHour"
+                       class="form-control" th:disabled="${operation} == excluir"
+                       data-mask="00:00"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Cep de largada:</td>
+            <td><input th:value="${race?.startCep}" type="text" name="startCep"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Descrição largada:</td>
+            <td><input th:value="${race?.startDescription}" type="text" name="startDescription"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Cep de chegada:</td>
+            <td><input th:value="${race?.finalCep}" type="text" name="finalCep"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Descrição chegada:</td>
+            <td><input th:value="${race?.endDescription}" type="text" name="endDescription"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Data de retirada do kit:</td>
+            <td><input th:value="${race?.kitWithdraw}" type="text" name="kitWithdraw"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+            <td><a href="/race/">Voltar</a></td>
+        </tr>
+    </table>
+</form>
+<script th:src="@{~/js/jquery.mask.min.js}"></script>
+<script>
+    var options = {
+        onKeyPress: function (cpf, ev, el, op) {
+            var masks = ['000.000.000-000', '00.000.000/0000-00'],
+                mask = (cpf.length > 14) ? masks[1] : masks[0];
+            el.mask(mask, op);
+        }
+    };
+    $('.cpfOuCnpj').mask('000.000.000-000', options);
+    $('.rg').mask('ZZ-00.000.000', {
+        translation: {
+            'Z': {
+                pattern: /[A-Za-z]/, optional: true
+            }
+        }, placeholder: "UF-01-234-567"
+    });
+</script>
+<footer th:replace="fragments/footer :: footer"></footer>

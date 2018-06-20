@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdministratorRepository extends CrudRepository<Administrator, Long> {
+public interface AdministratorRepository extends CrudRepository<Administrator, String> {
 
     public Administrator findByEmail(String email);
 

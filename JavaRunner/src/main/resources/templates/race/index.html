@@ -1,0 +1,22 @@
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<h1>Lista de Corridas</h1></center>
+
+<!--<span th:text="${newRace?.name}"></span>-->
+
+<table border="1" th:if="${!races.isEmpty()}">
+    <tr>
+        <td>Tipo</td>
+        <td colspan="2">Acao</td>
+    </tr>
+    <tr th:each="race : ${races}">
+        <td th:text="${race.name}">Nome</td>
+        <td th:text="${race.data}">Data</td>
+        <td th:text="${race.subscribes}">Máximo de inscritos</td>
+        <td><a th:href="@{'/race/edit/' + ${race.id}}">Editar</a></td>
+        <td><a th:href="@{'/race/delete/' + ${race.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!races.isEmpty()}">Sem Corridas</h2>
+<a th:href="@{'~/race/add/'}">Adicionar</a>
+<td><a th:href="@{'~/'}">Página Inicial</a></td>

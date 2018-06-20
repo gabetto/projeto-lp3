@@ -3,6 +3,8 @@ package com.JavaRunner.JavaRunner.domain.repository;
 import com.JavaRunner.JavaRunner.domain.model.Race;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RaceRepository extends CrudRepository<Race, Long> {
-    public Race findByName(String name);
+import java.util.Optional;
+
+public interface RaceRepository extends CrudRepository<Race, String> {
+    Optional<Race> findByName(String name);
 }
