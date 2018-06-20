@@ -23,7 +23,7 @@ public class AdministratorController {
 
     @GetMapping
     public String administrator(Model model) {
-        model.addAttribute("tittle", "Lista de administradores");
+        model.addAttribute("title", "Lista de administradores");
         model.addAttribute("administrators", administratorRepository.findAll());
         return "administrator/index";
     }

@@ -1,6 +1,8 @@
 package com.JavaRunner.JavaRunner.domain.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,8 +10,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@MappedSuperclass
 @Data
+@Getter(AccessLevel.PUBLIC)
+@MappedSuperclass
 @Accessors(chain = true)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class DatabaseCommons implements Serializable {

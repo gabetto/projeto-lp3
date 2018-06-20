@@ -1,4 +1,18 @@
-<head th:replace="fragments/head:: head"></head>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Corrida do Tonhão</title>
+    <link rel="stylesheet" th:href="@{~/css/tachyons.min.css}"/>
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{~/css/tonhao.min.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Montserrat" rel="stylesheet">
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <script th:src="@{~/js/angular.min.js}"></script>
+    <script th:src="@{~/js/bootstrap.min.js}"></script>
+    <script th:src="@{~/js/popper.min.js}"></script>
+</head>
+</html>
+<!--<head th:replace="fragments/head:: head"></head>-->
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <h1 th:text="${title}">Operação</h1>
 <form th:object="${race}" method="post">

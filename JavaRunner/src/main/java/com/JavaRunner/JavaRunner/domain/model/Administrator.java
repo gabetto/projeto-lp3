@@ -14,11 +14,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.HashMap;
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
 @Data
+@Entity
 @Accessors(chain = true)
 @Table(name = "administrator")
+@EqualsAndHashCode(callSuper = true)
 public class Administrator extends DatabaseCommons implements Validator<Administrator> {
     @Column(nullable = false, length = 64)
     private String login;

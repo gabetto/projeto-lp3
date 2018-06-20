@@ -66,6 +66,8 @@ public class Race extends DatabaseCommons implements Validator<Race> {
     private Collection<Lot> lots;
     @ManyToMany
     private Collection<Ranking> rankings;
+    @ManyToMany
+    private Collection<Runner> runners;
 
     @Override
     public HashMap<String, String> findErrors() {
