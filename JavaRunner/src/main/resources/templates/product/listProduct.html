@@ -50,8 +50,8 @@
     <tr><td>Nome</td><td>Descrição</td><td>Preço</td><td colspan="2">Acao</td></tr>
     <tr th:each="product : ${products}">
         <td th:text="${product.nome}">Nome</td>
-        <td th:text="${product.descricao}">Descrição</td>
-        <td th:text="${product.preco}">Preco</td>
+        <td th:text="${product.description}">Descrição</td>
+        <td th:text="${product.price}">Preco</td>
         <td><a th:href="@{'/product/edit/' + ${product.id}}" >Editar</a></td>
         <td><a th:href="@{'/product/delete/' + ${product.id}}">Excluir</a></td>
     </tr>

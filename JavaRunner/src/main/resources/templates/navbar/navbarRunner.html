@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SCCR - Sistema de Controle de Corridas de Rua</title>
+        <meta name="author" content="?">    
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+    </head>
+
+    <body>
+        <div id="tf-home">
+            <div class="overlay">
+                <div id="sticky-anchor"> </div>
+                <nav id="tf-menu" class="navbar navbar-default">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a th:href="@{'~/'}">Home</a></li>
+                                <li><a href="race">Corridas</a></li>
+                                <li><a href="ranking">Rankings</a></li>
+                                <li><a href="kit">Kits</a></li>
+                                <li><a href="">Cadastrar</a></li>
+                            </ul>
+                        </div>
+                    </div>  
+                </nav>
+            </div>
+        </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="js/modernizr.custom.js"></script>  
+    </body>
+</html>

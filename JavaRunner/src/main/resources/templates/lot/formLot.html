@@ -49,7 +49,7 @@
     <table>
         <tr>
             <td>Data inicial:</td>
-            <td><input th:value="${lot?.dataInicial}" type="text" name="dataInicial" class="form-control" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${lot?.initialDate}" type="text" name="initialDate" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Data final:</td>
@@ -58,7 +58,7 @@
         </tr>
         <tr>
             <td>Desconto:</td>
-            <td><input th:value="${lot?.desconto}" type="text" name="desconto" class="form-control" th:disabled="${operation} == excluir"/>
+            <td><input th:value="${lot?.discount}" type="text" name="discount" class="form-control" th:disabled="${operation} == excluir"/>
             </td>
         </tr>
 

@@ -49,9 +49,9 @@
 <center><table border="1" th:if="${!lots.isEmpty()}">
     <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
     <tr th:each="lot : ${lots}">
-        <td th:text="${lot.dataInicial}">Data inicial</td>
+        <td th:text="${lot.initialDate}">Data inicial</td>
         <td th:text="${lot.dataFinal}">Data final</td>
-        <td th:text="${lot.desconto}">Desconto</td>
+        <td th:text="${lot.discount}">Desconto</td>
         <td><a th:href="@{'/lot/edit/' + ${lot.id}}" >Editar</a></td>
         <td><a th:href="@{'/lot/delete/' + ${lot.id}}">Excluir</a></td>
     </tr>
