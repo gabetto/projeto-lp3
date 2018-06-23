@@ -7,16 +7,14 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.util.Collection;
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
 @Data
-@Accessors(chain = true)
+@Entity
 @Table(name = "ranking")
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 public class Ranking extends DatabaseCommons {
-    @Basic
     @Column(nullable = false, length = 64)
     private String rankingName;
-    @Basic
     @Column(nullable = false, length = 64)
     private String organizer;
     @Column(length = 64)

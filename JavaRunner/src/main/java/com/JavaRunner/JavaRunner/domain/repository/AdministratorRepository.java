@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AdministratorRepository extends CrudRepository<Administrator, String> {
-    Administrator findByEmail(String email);
     Optional<Administrator> findByLoginAndPassword(String login, String password);
 
 }

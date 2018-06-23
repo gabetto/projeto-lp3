@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Relatório de Corredor</title>
+    <meta charset="UTF-8">
+    <title>Sistema de Corrida do Tonhão</title>
+    <link rel="stylesheet" th:href="@{~/css/tachyons.min.css}"/>
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{~/css/tonhao.min.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Montserrat" rel="stylesheet">
+    <script th:src="@{~/js/jquery.min.js}"></script>
+    <script th:src="@{~/js/bootstrap.min.js}"></script>
+    <script th:src="@{~/js/popper.min.js}"></script>
+</head>
+<body style="overflow-x: hidden">
+<h1 class="text-center tc center bg-black white pa3 mt2">
+    Relatório de Corredores:
+    <small><strong>runner</strong></small>
+</h1>
+<div class="ma3">
+    <h4 class="text-center tc center pa2 mt2">Total de registros: <strong th:text="${count}"></strong></h4>
+    <h4 class="text-center tc center pa2 mt2">
+        <span onclick="window.print()"
+                class="d-print-none bg-dark-blue-gray pa2 white bg-animate hover-black pointer link grow hover-bg-material-cyan hidden-print">Gerar
+            PDF</span>
+    </h4>
+</div>
+<div class="list pl0 mt0 measure center">
+    <div th:each="admin : ${list}" class="mb3">
+        <div class="b">Id:
+            <span th:text="${admin.id}"></span></div>
+        <div class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
+            <img class="w2 h2 w3-ns h3-ns br-100"
+                 src="https://visualpharm.com/assets/451/Admin-595b40b65ba036ed117d286d.svg"/>
+            <div class="pl3 flex-auto">
+                <span class="f6 db black-70">Login: <strong th:text="${admin.name}"></strong></span>
+                <span class="f6 db black-70">Email: <strong th:text="${admin.email}"></strong></span>
+                <span class="f6 db black-70">CPF: <strong th:text="${admin.cpf}"></strong></span>
+                <span class="f6 db black-70">RG: <strong th:text="${admin.rg}"></strong></span>
+                <span class="f6 db black-70">Data de Nascimento: <strong th:text="${admin.birthDate}"></strong></span>
+                <span class="f6 db black-70">Sexo: <strong th:text="${admin.sex}"></strong></span>
+                <span class="f6 db black-70"><small th:text="${admin.password}"></small></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
