@@ -5,10 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @Component
-public interface RunnerRepository extends CrudRepository<Runner, Long> {
-    public Runner findByEmail(String email);
-    public Runner findByCpf(String cpf);
-    public Runner findByRg(String rg);
+public interface RunnerRepository extends CrudRepository<Runner, String> {
+    Optional<Runner> findByEmailAndPassword(String email, String password);
 }

@@ -1,0 +1,58 @@
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<h1 th:text="${title}"> Operação </h1>
+<form th:object="${administrator}" method="post">
+    <table>
+        <tr>
+            <td>Nome completo:</td>
+            <td><input th:value="${administrator?.name}" type="text" name="name" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td><input th:value="${administrator?.email}" type="text" name="email" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>RG:</td>
+            <td><input th:value="${administrator?.rg}" type="text" name="rg" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>CPF:</td>
+            <td><input th:value="${administrator?.cpf}" type="text" name="cpf" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Sexo:</td>
+            <td><input th:value="${administrator?.sex}" type="text" name="sex" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Data de nascimento:</td>
+            <td><input th:value="${administrator?.birthDate}" type="text" name="birthDate" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Login:</td>
+            <td><input th:value="${administrator?.login}" type="text" name="login" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Senha:</td>
+            <td><input th:value="${administrator?.password}" type="text" name="password" class="form-control"
+                       th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td>Fator secundário:</td>
+            <td><input th:value="${administrator?.callback}" type="text" name="callback"
+                       class="form-control" th:disabled="${operation} == excluir"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" th:value="${botaoOperacao}"/></td>
+            <td><a href="/administrator/">Voltar</a></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

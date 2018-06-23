@@ -1,0 +1,22 @@
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<h1>Lista de Administradores</h1>
+
+<table border="1" th:if="${!administrators.isEmpty()}">
+    <tr>
+        <td>Nome</td>
+        <td>Email</td>
+        <td colspan="2">Acao</td>
+    </tr>
+    <tr th:each="administrator : ${administrators}">
+        <td th:text="${administrator.name}">Nome</td>
+        <td th:text="${administrator.email}">E-mail</td>
+        <td><a th:href="@{'/admin/edit/' + ${administrator.id}}">Editar</a></td>
+        <td><a th:href="@{'/admin/delete/' + ${administrator.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2>
+<a th:href="@{'~/admin/add/'}">Adicionar</a>
+<a th:href="@{'~/'}">Página Inicial</a>
+</body>
+</html>

@@ -1,75 +1,73 @@
 package com.JavaRunner.JavaRunner.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.JavaRunner.JavaRunner.utils.Capitalize;
-import com.JavaRunner.JavaRunner.utils.contracts.ModelValidation;
-import com.JavaRunner.JavaRunner.utils.exceptions.BeforeDateException;
-import com.JavaRunner.JavaRunner.utils.exceptions.CpfException;
-import com.JavaRunner.JavaRunner.utils.exceptions.EmailException;
-import com.JavaRunner.JavaRunner.utils.exceptions.PasswordException;
 import com.JavaRunner.JavaRunner.utils.validations.RegexFilters;
 import com.JavaRunner.JavaRunner.utils.validations.Validations;
+import com.JavaRunner.JavaRunner.utils.validations.Validator;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashMap;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Accessors(chain = true)
-@Table(name = "corredor")
-public class Runner implements Serializable, ModelValidation<Runner> {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @Basic
+@Table(name = "runner")
+public class Runner extends DatabaseCommons implements Serializable, Validator<Runner> {
     @NotNull
-    @Column(name = "apelido", nullable = false, length = 256)
+    @Column(name = "apelido", length = 256)
     private String nickname;
-    @Basic
     @NotNull
-    @Column(name = "avatar", nullable = true, length = 256)
+    @Column(name = "avatar", length = 256)
     private String avatar;
-    @Basic
     @NotNull
-    @Column(name = "nome_completo", nullable = false, length = 128)
+    @Column(name = "nome_completo", length = 192)
     private String name;
-    @Basic
     @NotNull
-    @Column(name = "email", nullable = false, length = 128)
+    @Column(name = "email", length = 256)
     private String email;
-    @Basic
     @NotNull
-    @Column(name = "rg", nullable = false, length = 20)
+    @Column(name = "rg", length = 20)
     private String rg;
-    @Basic
     @NotNull
-    @Column(name = "cpf", nullable = false, length = 20)
+    @Column(name = "cpf", length = 20)
     private String cpf;
-    @Basic
     @NotNull
-    @Column(name = "password", nullable = false, length = 60)
+    @Column(name = "password", length = 60)
     private String password;
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull
-    private String confirmPassword;
-    @Basic
-    @NotNull
-    @Column(name = "data_nascimento", nullable = false, length = 20)
+    @Column(name = "data_nascimento", length = 20)
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     private String birthDate;
     @NotNull
-    @Column(name = "sexo", nullable = false, length = 21)
+    @Column(name = "sexo", length = 21)
     private String sex;
 
     @Override
-    public Runner validate() throws Exception {
-        if (!Validations.passwordEquals(this.getPassword(), this.getConfirmPassword())) throw new PasswordException();
-        if (Validations.beforeThanToday(this.getBirthDate())) throw new BeforeDateException();
-        if (!RegexFilters.isValidEmail(this.getEmail())) throw new EmailException();
-        if (!Validations.isValidCpf(this.getCpf())) throw new CpfException();
+    public HashMap<String, String> findErrors() throws Exception {
+        HashMap<String, String> errors = new HashMap<>();
+        if (Validations.beforeThanToday(this.getBirthDate())) {
+            errors.put("birthdate", "Birth date must before then today");
+        }
+        if (!RegexFilters.isValidEmail(this.getEmail())) {
+            errors.put("email", "Wrong email pattern");
+        }
+        if (!Validations.isValidCpf(this.getCpf())) {
+            errors.put("password", "Wrong cpf pattern or value");
+        }
+        return errors;
+    }
+
+    @Override
+    public Runner beautify() {
         return new Runner()
                 .setAvatar(getAvatar())
                 .setBirthDate(getBirthDate())
@@ -79,7 +77,6 @@ public class Runner implements Serializable, ModelValidation<Runner> {
                 .setCpf(getCpf())
                 .setNickname(getNickname())
                 .setPassword(getPassword())
-                .setConfirmPassword(getConfirmPassword())
-                .setSex(getSex());
+                .setSex(Capitalize.capitalizeByWords(sex));
     }
 }

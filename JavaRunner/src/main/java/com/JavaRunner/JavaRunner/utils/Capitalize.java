@@ -1,46 +1,15 @@
-package com.JavaRunner.JavaRunner.utils;/*
- * Capitalize it's a little class to implements capitalize strings, convert cases (Slug, Camel and Sneak).
- * Using Capitalize:
- * String name = "pedRO DE ALcÂntARA joão carlOs";
- * // General purpose capitalize
- * Capitalize.capitalizeByWords(name); // Pedro De Alcântara João Carlos
- * // Brazilian capitalize names (connectives are not UPPER CASE)
- * Capitalize.brazilianCapitalize(name); // Pedro de Alcântara João Carlos
- * // Every String to camelCaseString
- * Capitalize.toCamelCase(name); // PedRoDeALcÂntAraJoãoCarlOs - Ops...maybe this isn't the expected string, so...
- * Capitalize.toCamelCase(Capitalize.capitalizeByWords(name); // PedroDeAlcântaraJoãoCarlos - Works great !!!
- * // Every String to sneak_case
- * Capitalize.toSneakeCase(name); // ped_ro_de_a_lc_ânt_ara_joão_carl_os - Same case, same solution
- * // Every String to slug-case
- * Capitalize.toSlugCase(name); // ped-ro-de-a-lc-ânt-ara-joão-carl-os - Same case, same solution ^2
- * Capitalize.toSlugCase(Capitalize.capitalizeByWords(name); // pedro-de-alcântara-joão-carlos - Works great, again !!! ^2
- * */
+package com.JavaRunner.JavaRunner.utils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Allan 'vandalvnl' Garcez
- */
 public final class Capitalize {
 
-    /**
-     * All accented characters in the Portuguese alphabet, in UPPER CASE
-     */
     private static final String ALL_SPECIAL_UPPER_CASE = "A-ZÇÁÀÃÂÉÈẼÊÌÍĨÎÕÓÒÔŨÚÙÜÛ";
-    /**
-     * All accented characters in the Portuguese alphabet, in lower case
-     */
     private static final String ALL_SPECIAL_LOWER_CASE = "a-zçáàãâéèẽêìíĩîõóòôũúùüû";
-
-    /**
-     * Just regex for characters in ALL_SPECIAL...in cases where groups covering the
-     */
     private static final String REGEX_ALL_UPPER_CASE = "[" + ALL_SPECIAL_UPPER_CASE + "]";
-    /**
-     * Same for REGEX_ALL_UPPER_CASE
-     */
     private static final String REGEX_ALL_LOWER_CASE = "[" + ALL_SPECIAL_LOWER_CASE + "]";
 
     /**
@@ -143,4 +112,10 @@ public final class Capitalize {
                         "(" + REGEX_ALL_UPPER_CASE + "[" +
                         ALL_SPECIAL_LOWER_CASE + "\\d]+)", "$1" + replace + "$2");
     }
+
+
+    public static String fix(HttpServletRequest request, String newPath) {
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/" + newPath;
+    }
+
 }

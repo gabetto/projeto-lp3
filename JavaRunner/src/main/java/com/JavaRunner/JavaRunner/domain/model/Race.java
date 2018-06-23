@@ -1,87 +1,92 @@
 package com.JavaRunner.JavaRunner.domain.model;
 
-import com.JavaRunner.JavaRunner.utils.Capitalize;
-import com.JavaRunner.JavaRunner.utils.contracts.ModelValidation;
-import lombok.AllArgsConstructor;
+import com.JavaRunner.JavaRunner.utils.validations.Validations;
+import com.JavaRunner.JavaRunner.utils.validations.Validator;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 
-@Entity
-@Table(name = "corrida")
 @Data
-@AllArgsConstructor
-public class Race implements Serializable, ModelValidation<Race> {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @Column(name = "nome_corrida", nullable = false, length = 64)
+@Entity
+@Table(name = "race")
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+public class Race extends DatabaseCommons implements Validator<Race> {
+    @Column(nullable = false, length = 64)
     private String name;
-    @Column(name = "data", nullable = false, length = 12)
+    @Column(nullable = false, length = 12)
     private String data;
-    @Column(name = "valor_corrida", nullable = false, precision = 2)
-    private Double value;
-    @Column(name = "maximo_inscritos", nullable = false)
-    private Integer maxSubscribes;
-    @Column(name = "kilometragem", nullable = true, precision = 2)
-    private Double maxLength;
-    @Column(name = "organizador", nullable = false, length = 64)
+    @Column(nullable = false, precision = 2)
+    private Double price;
+    @Column(nullable = false)
+    private Integer subscribes;
+    @Column(precision = 3, nullable = false)
+    private Double length;
+    @Column(nullable = false, length = 64)
     private String organizer;
-    @Column(name = "tipo_chip", nullable = false)
-    private String tipoChip;
-    @Column(name = "descricao", nullable = false, length = 1024)
-    private String descricao;
-    @Column(name = "cidade", nullable = true, length = 64)
+    @Column(nullable = false, length = 11)
+    private String chip;
+    @Column(nullable = false, length = 1024)
+    private String description;
+    @Column(length = 64, nullable = false)
     private String city;
-    @Column(name = "estado", nullable = true, length = 64)
+    @Column(length = 64, nullable = false)
     private String state;
-    @Column(name = "regiao", nullable = true, length = 64)
+    @Column(length = 64, nullable = false)
     private String region;
-    @Column(name = "hora", nullable = false, length = 7)
+    @Column(nullable = false, length = 12)
     private String initialHour;
-    @Column(name = "cor")
-    private String cor;
-    @Column(name = "hora_final", nullable = true, length = 7)
+    @Column(nullable = false, length = 12)
+    private String color;
+    @Column(length = 12, nullable = false)
     private String finalHour;
-    @Column(name = "cep_chegada", nullable = true, length = 20)
+    @Column(length = 20, nullable = false)
     private String finalCep;
-    @Column(name = "cep_largada", nullable = true, length = 20)
+    @Column(length = 20, nullable = false)
     private String startCep;
-    @Column(name = "descricao_chegada", nullable = true, length = 1024)
-    private String descricaoChegada;
-    @Column(name = "descricao_largada", nullable = true, length = 1024)
-    private String descricaoLargada;
-    @Column(name = "data_retirada_kit", nullable = true, length = 15)
-    private String dataRetiradaKit;
+    @Column(length = 1024, nullable = false)
+    private String startDescription;
+    @Column(length = 1024, nullable = false)
+    private String endDescription;
+    @Column(length = 15, nullable = false)
+    private String kitWithdraw;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corrida_id")
+    @JoinColumn
     private Collection<Route> routes;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corrida_id")
+    @JoinColumn
     private Collection<Kit> kits;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corrida_id")
+    @JoinColumn
     private Collection<Lot> lots;
-
-    public Race(){
-
-    }
-
     @ManyToMany
     private Collection<Ranking> rankings;
+    @ManyToMany
+    private Collection<Runner> runners;
 
     @Override
-    public Race validate() throws Exception {
-        return new Race(
-                this.id, Capitalize.brazilianCapitalize(this.name), this.data,
-                this.value, this.maxSubscribes, this.maxLength, Capitalize.brazilianCapitalize(this.organizer),
-                this.tipoChip, this.descricao, Capitalize.brazilianCapitalize(this.city),
-                Capitalize.brazilianCapitalize(this.state), Capitalize.brazilianCapitalize(this.region),
-                this.initialHour, this.cor,this.finalHour, this.finalCep, this.startCep,
-                this.descricaoChegada, this.descricaoLargada, this.dataRetiradaKit,
-                this.routes, this.kits, this.lots, this.rankings
-        );
+    public HashMap<String, String> findErrors() {
+        HashMap<String, String> errors = new HashMap<>();
+        if (!Validations.beforeThanToday(this.getData())) {
+            errors.put("dataError", "A corrida deve ser em um dia futuro");
+        }
+        return errors;
+    }
+
+    @Override
+    public Race beautify() {
+        return new Race().setName(name).setOrganizer(organizer)
+                .setPrice(price).setRegion(region).setStartCep(startCep)
+                .setData(data).setSubscribes(subscribes).setLength(length)
+                .setKitWithdraw(kitWithdraw).setRegion(region)
+                .setState(state).setCity(city).setDescription(description)
+                .setEndDescription(endDescription).setFinalCep(finalCep)
+                .setColor(color).setChip(chip).setFinalHour(finalHour)
+                .setInitialHour(initialHour).setStartDescription(startDescription);
     }
 }

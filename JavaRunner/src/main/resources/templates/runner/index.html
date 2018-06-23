@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Administradores</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <meta charset="UTF-8">
+    <title>Corredores</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -43,24 +43,27 @@
             <li>
                 <a class="nav-link active" href="rule">Regras<span class="sr-only">(current)</span></a>
             </li>
-
+        </ul>
     </div>
 </nav>
-
-<center><h1>Lista de Administradores</h1></center>
-
-<center><table border="1" th:if="${!administrators.isEmpty()}">
-    <tr><td>Nome</td><td>Email</td><td colspan="2">Acao</td></tr>
-    <tr th:each="administrator : ${administrators}">
-        <td th:text="${administrator.name}">Nome</td>
-        <td th:text="${administrator.email}">E-mail</td>
-        <td><a th:href="@{'/administrator/edit/' + ${administrator.id}}" >Editar</a></td>
-        <td><a th:href="@{'/administrator/delete/' + ${administrator.id}}">Excluir</a></td>
+<h1>Lista de Corredores</h1>
+<table border="1">
+    <tr>
+        <td>Nome</td>
+        <td>E-mail</td>
+        <td colspan="2">Acao</td>
     </tr>
-</table></center>
-<center><h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2></center>
+    <tr th:each="runner : ${runners}">
+        <td th:text="${runner.name}">Nome</td>
+        <td th:text="${runner.email}">E-mail</td>
+        <td><a th:href="@{'/runner/edit/' + ${runner.id}}">Editar</a></td>
+        <td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
+    </tr>
+</table>
+<h2 th:unless="${!runners.isEmpty()}">Sem corredores</h2>
 
-<center><a th:href="@{'~/administrator/add/'}">Adicionar</a></center>
-<center><td><a th:href="@{'~/'}">Página Inicial</a></td></center>
+<a th:href="@{~/runner/add}">Adicionar</a><br>
+<td><a th:href="@{'~/'}">Página Inicial</a></td>
+
 </body>
 </html>
