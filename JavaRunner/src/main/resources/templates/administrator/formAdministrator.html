@@ -77,11 +77,11 @@
         </tr>
         <tr>
             <td>Senha:</td>
-            <td><input th:value="${administrator?.password}" type="text" name="password" class="form-control" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.password}" type="password" name="password" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td>Autenticação secundária:</td>
-            <td><input th:value="${administrator?.secondaryAuth}" type="text" name="secondaryAuth" class="form-control" th:disabled="${operation} == excluir"/></td>
+            <td><input th:value="${administrator?.secondaryAuth}" type="password" name="secondaryAuth" class="form-control" th:disabled="${operation} == excluir"/></td>
         </tr>
         <tr>
             <td><input type="submit" th:value="${botaoOperacao}"/></td>
