@@ -1,53 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Corredores</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="administrator">Administradores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="runner">Corredores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="race">Corridas<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="kit">Kits<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="lot">Lotes<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="product">Produtos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="ranking">Rankings<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="route">Percursos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="rule">Regras<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<h1>Lista de Corredores</h1>
-<table border="1">
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<center><h1>Lista de Corredores</h1></center>
+<table border="1" th:if="${!runners.isEmpty()}">
     <tr>
         <td>Nome</td>
         <td>E-mail</td>
@@ -60,10 +14,25 @@
         <td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
     </tr>
 </table>
-<h2 th:unless="${!runners.isEmpty()}">Sem corredores</h2>
 
-<a th:href="@{~/runner/add}">Adicionar</a><br>
-<td><a th:href="@{'~/'}">Página Inicial</a></td>
-
-</body>
-</html>
+<table class="table table-striped" th:if="${!runners.isEmpty()}">
+    <thead>
+    <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rule : ${runners}">
+        <td th:text="${runner.name}">Nome</td>
+        <td th:text="${runner.email">E-mail</td>
+        <td><a th:href="@{'/runner/edit/' + ${runner.id}}" >Editar</a> || <a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+<center>
+    <h2 th:unless="${!runners.isEmpty()}">Sem Corredores</h2>
+    <a class="text-center" th:href="@{'~/runner/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/runner/add/'}">Adicionar coredor</button></a>
+    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/'}">Página Inicial</button></a>
+</center>
+<footer th:replace="fragments/footer :: footer"></footer>

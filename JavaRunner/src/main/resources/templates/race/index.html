@@ -1,22 +1,32 @@
 <head th:replace="/fragments/head:: head"></head>
 <navbar th:replace="/fragments/anon/navbar :: navbar"></navbar>
-<h1>Lista de Corridas</h1>
+<center><h1>Lista de Corridas</h1></center>
 
 <!--<span th:text="${newRace?.name}"></span>-->
 
-<table border="1" th:if="${!races.isEmpty()}">
+<table class="table table-striped" th:if="${!races.isEmpty()}">
+    <thead>
     <tr>
-        <td>Tipo</td>
-        <td colspan="2">Acao</td>
+        <th scope="col">Nome</th>
+        <th scope="col">Data</th>
+        <th scope="col">Máximo de inscritos</th>
+        <th scope="col">Organizador</th>
+        <th scope="col">Ação</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="race : ${races}">
         <td th:text="${race.name}">Nome</td>
         <td th:text="${race.data}">Data</td>
         <td th:text="${race.subscribes}">Máximo de inscritos</td>
-        <td><a th:href="@{'/race/edit/' + ${race.id}}">Editar</a></td>
-        <td><a th:href="@{'/race/delete/' + ${race.id}}">Excluir</a></td>
+        <td th:text="${race.organizer}">Organizer</td>
+        <td><a th:href="@{'/race/edit/' + ${race.id}}" >Editar</a> || <a th:href="@{'/race/delete/' + ${race.id}}">Excluir</a></td>
     </tr>
+    </tbody>
 </table>
-<h2 th:unless="${!races.isEmpty()}">Sem Corridas</h2>
-<a th:href="@{'~/race/add/'}">Adicionar</a>
-<td><a th:href="@{'~/'}">Página Inicial</a></td>
+<center>
+    <h2 th:unless="${!races.isEmpty()}">Sem Corridas</h2>
+    <a class="text-center" th:href="@{'~/race/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/race/add/'}">Adicionar</button></a>
+    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/race/add/'}">Página Inicial</button></a></center>
+</center>
+<footer th:replace="fragments/footer :: footer"></footer>

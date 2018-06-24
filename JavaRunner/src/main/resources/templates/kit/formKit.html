@@ -1,78 +1,56 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Kit</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="administrator">Administradores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/runner/">Corredores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/race/">Corridas<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/kit/">Kits<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/lot/">Lotes<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/product/">Produtos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/ranking/">Rankings<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/route/">Percursos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="/rule/">Regras<span class="sr-only">(current)</span></a>
-            </li>
-
-    </div>
-</nav>
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <center><h1 th:text="${tittle}"> Operação </h1></center>
-<center><form th:object="${kit}" method="post">
-    <table>
-        <tr>
-            <td>Nome:</td>
-            <td><input th:value="${kit?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Tipo:</td>
-            <td><input th:value="${kit?.type}" type="text" name="type" class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Descrição:</td>
-            <td><input th:value="${kit?.description}" type="text" name="description" class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Corrida:</td>
-            <td>
-                <select th:disabled="${operation} == excluir" name="route">
-                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" th:value="${corrida.id}"
-                            th:text="${corrida.name}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="submit" th:value="${botaoOperacao}"/></td>
-            <td><a href="/kit/">Voltar</a></td>
-        </tr>
-    </table>
-</form></center>
-</body>
-</html>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                </div>
+                <div class="col-md-auto">
+                    <form th:object="${kit}" id="formKit" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Nome:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${kit?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Tipo:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${kit?.type}" type="text" name="type" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Descrição:</label>
+                            <div class="col-sm-8">
+                                <textarea form="formKit" rows="3" th:value="${kit?.description}" type="text" name="description" class="form-control" th:disabled="${operation} == delete"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Corrida:</label>
+                            <div class="col-sm-8">
+                                <select th:disabled="${operation} == delete" name="route">
+                                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" th:value="${corrida.id}"
+                                            th:text="${corrida.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <center>
+                            <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
+                            <a th:href="@{'~/kit/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
+                        </center>
+                    </form>
+                </div>
+                <div class="col col-lg-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>

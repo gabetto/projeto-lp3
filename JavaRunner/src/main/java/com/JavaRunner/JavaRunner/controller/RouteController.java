@@ -42,7 +42,7 @@ public class RouteController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getRouteEdit(Model model, @PathVariable Long id) {
+    public String getRouteEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar percurso");
         model.addAttribute("botaoOperacao", "Editar percurso");
@@ -55,7 +55,7 @@ public class RouteController {
 
     @PostMapping(value = "/edit/{id}")
     public String postRouteEdit(@ModelAttribute Route route, Model model,
-                              @PathVariable Long id) throws Exception {
+                              @PathVariable String id) throws Exception {
         if (id.equals(route.getId())) {
             routeRepository.save(route);
         } else {
@@ -65,7 +65,7 @@ public class RouteController {
     }
 
     @GetMapping(value = "delete/{id}")
-    public String getRunDelete(Model model, @PathVariable Long id) {
+    public String getRunDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir percurso");
         model.addAttribute("botaoOperacao", "Excluir percurso");
@@ -77,7 +77,7 @@ public class RouteController {
     }
 
     @PostMapping(value = "delete/{id}")
-    public String postRunDelete(@PathVariable Long id, @ModelAttribute Route route) {
+    public String postRunDelete(@PathVariable String id, @ModelAttribute Route route) {
         routeRepository.delete(route);
         return "redirect:/route";
     }

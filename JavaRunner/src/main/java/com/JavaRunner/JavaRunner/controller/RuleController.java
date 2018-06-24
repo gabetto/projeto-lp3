@@ -38,10 +38,10 @@ public class    RuleController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getEdit(Model model, @PathVariable Long id) {
+    public String getEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
-        model.addAttribute("title", "Editar rule");
-        model.addAttribute("botaoOperacao", "Editar rule");
+        model.addAttribute("title", "Editar regra");
+        model.addAttribute("botaoOperacao", "Editar regra");
         Optional<Rule> rule= ruleRepository.findById(id);
         if (rule.isPresent()){
             model.addAttribute("rule", rule.get());
@@ -51,7 +51,7 @@ public class    RuleController {
 
     @PostMapping(value = "/edit/{id}")
     public String postEdit(@ModelAttribute Rule rule, Model model,
-                           @PathVariable Long id) throws Exception {
+                           @PathVariable String id) throws Exception {
         if (id.equals(rule.getId())) {
             ruleRepository.save(rule);
         } else {
@@ -61,10 +61,10 @@ public class    RuleController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String getDelete(Model model, @PathVariable Long id) {
+    public String getDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
-        model.addAttribute("tittle", "Excluir rule");
-        model.addAttribute("botaoOperacao", "excluit rule");
+        model.addAttribute("tittle", "Excluir regra");
+        model.addAttribute("botaoOperacao", "Excluir regra");
         Optional<Rule> rule = ruleRepository.findById(id);
         if (rule.isPresent()) {
             model.addAttribute("rule", rule.get());
@@ -74,7 +74,7 @@ public class    RuleController {
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postDelete(@PathVariable Long id, @ModelAttribute Rule rule) {
+    public String postDelete(@PathVariable String id, @ModelAttribute Rule rule) {
         ruleRepository.delete(rule);
         return "redirect:/rule";
     }

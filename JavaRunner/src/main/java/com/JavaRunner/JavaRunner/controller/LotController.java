@@ -45,7 +45,7 @@ public class LotController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getLotEdit(Model model, @PathVariable Long id) {
+    public String getLotEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar lote");
         model.addAttribute("botaoOperacao", "Editar lote");
@@ -58,7 +58,7 @@ public class LotController {
 
     @PostMapping(value = "/edit/{id}")
     public String postLotEdit(@ModelAttribute Lot lot, Model model,
-                                @PathVariable Long id) throws Exception {
+                                @PathVariable String id) throws Exception {
         if (id.equals(lot.getId())) {
             lotRepository.save(lot);
         } else {
@@ -68,7 +68,7 @@ public class LotController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String getLotDelete(Model model, @PathVariable Long id) {
+    public String getLotDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir lote");
         model.addAttribute("botaoOperacao", "excluit lote");
@@ -81,7 +81,7 @@ public class LotController {
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postLotDelete(@PathVariable Long id, @ModelAttribute Lot lot) {
+    public String postLotDelete(@PathVariable String id, @ModelAttribute Lot lot) {
         lotRepository.delete(lot);
         return "redirect:/lot";
     }

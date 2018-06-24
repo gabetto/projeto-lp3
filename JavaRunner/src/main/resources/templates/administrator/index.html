@@ -2,21 +2,25 @@
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <h1>Lista de Administradores</h1>
 
-<table border="1" th:if="${!administrators.isEmpty()}">
+<table class="table table-striped" th:if="${!administrators.isEmpty()}">
+    <thead>
     <tr>
-        <td>Nome</td>
-        <td>Email</td>
-        <td colspan="2">Acao</td>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Ação</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="administrator : ${administrators}">
         <td th:text="${administrator.name}">Nome</td>
-        <td th:text="${administrator.email}">E-mail</td>
-        <td><a th:href="@{'/admin/edit/' + ${administrator.id}}">Editar</a></td>
-        <td><a th:href="@{'/admin/delete/' + ${administrator.id}}">Excluir</a></td>
+        <td th:text="${administrator.type}">E-mail</td>
+        <td><a th:href="@{'/administrator/edit/' + ${administrator.id}}" >Editar</a> || <a th:href="@{'/administrator/delete/' + ${administrator.id}}">Excluir</a></td>
     </tr>
+    </tbody>
 </table>
-<h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2>
-<a th:href="@{'~/admin/add/'}">Adicionar</a>
-<a th:href="@{'~/'}">Página Inicial</a>
-</body>
-</html>
+<center>
+    <h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2>
+    <a class="text-center" th:href="@{'~/administrator/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/administrator/add/'}">Adicionar</button></a>
+    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/administrator/add/'}">Página Inicial</button></a></center>
+</center>
+<footer th:replace="fragments/footer :: footer"></footer>
