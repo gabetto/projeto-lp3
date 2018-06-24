@@ -1,6 +1,77 @@
 <head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<script>
+    $(document).ready(function () {
+        $(".form-wrapper #next").click(function () {
+            var button = $(this);
+            var currentSection = button.parents(".section");
+            var currentSectionIndex = currentSection.index();
+            var headerSection = $('.steps li').eq(currentSectionIndex);
+            currentSection.removeClass("is-active").next().addClass("is-active");
+            headerSection.removeClass("is-active").next().addClass("is-active");
 
+            if (currentSectionIndex === 3) {
+                $(document).find(".form-wrapper .section").first().addClass("is-active");
+                $(document).find(".steps li").first().addClass("is-active");
+            }
+        });
+    });
+</script>
+<style>
+
+    .steps {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .steps li {
+        display: inline-block;
+        margin: 20px;
+        color: #ccc;
+        padding-bottom: 5px;
+    }
+
+    .steps li.is-active {
+        border-bottom: 1px solid #3498db;
+        color: #3498db;
+    }
+
+    /* FORM */
+
+    .form-wrapper .section {
+        opacity: 0;
+        -webkit-transform: scale(1, 0);
+        -ms-transform: scale(1, 0);
+        -o-transform: scale(1, 0);
+        transform: scale(1, 0);
+        -webkit-transform-origin: top center;
+        -moz-transform-origin: top center;
+        -ms-transform-origin: top center;
+        -o-transform-origin: top center;
+        transform-origin: top center;
+        -webkit-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        position: absolute;
+    }
+
+    .form-wrapper .section h3 {
+        margin-bottom: 30px;
+    }
+
+    .form-wrapper .section.is-active {
+        opacity: 1;
+        -webkit-transform: scale(1, 1);
+        -ms-transform: scale(1, 1);
+        -o-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+
+</style>
 <ul class="steps mt-5">
     <li class="is-active">Inscrição</li>
     <li>Pagamento</li>
@@ -8,9 +79,9 @@
 <form th:object="${race}" method="post" class="form-wrapper">
     <fieldset class="container-fluid section is-active">
         <div class="text-center">
-            <h3 th:text=$"race.name" ></h3>
+            <h3 th:text=$"race.name"></h3>
         </div>
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="card">
@@ -47,7 +118,7 @@
                             </label>
                             <select class="form-control">
                                 <option th:if="${routes} != null" th:each="route : ${routes}" th:value="${route.id}"
-                                        th:text="${route.name}"></option>
+                                        tth:text="${route.name}"></option>
                             </select>
                             <label class="pt-2">
                                 <b>Kit:</b>
@@ -115,8 +186,10 @@
         <div class="container-fluid w-75 mt-5">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cartão de crédito</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Boleto</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">Cartão de crédito</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Boleto</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -128,23 +201,29 @@
                                     <fieldset>
                                         <legend>Pagamento via crédito</legend>
                                         <div class="form-group">
-                                            <label class="col-sm-12 control-label" for="card-holder-name">Titular do cartão</label>
+                                            <label class="col-sm-12 control-label" for="card-holder-name">Titular do
+                                                cartão</label>
                                             <div class="col-sm-12">
-                                                <input required type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Titular do cartão">
+                                                <input required type="text" class="form-control" name="card-holder-name"
+                                                       id="card-holder-name" placeholder="Titular do cartão">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-12 control-label" for="card-number">Número do cartão</label>
+                                            <label class="col-sm-12 control-label" for="card-number">Número do
+                                                cartão</label>
                                             <div class="col-sm-12">
-                                                <input required type="text" class="form-control" name="card-number" id="card-number" placeholder="Número do cartão">
+                                                <input required type="text" class="form-control" name="card-number"
+                                                       id="card-number" placeholder="Número do cartão">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-12 control-label" for="expiry-month">Data de validade</label>
+                                            <label class="col-sm-12 control-label" for="expiry-month">Data de
+                                                validade</label>
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <select required class="form-control" name="expiry-month" id="expiry-month">
+                                                        <select required class="form-control" name="expiry-month"
+                                                                id="expiry-month">
                                                             <option>Mês</option>
                                                             <option value="01">Jan (01)</option>
                                                             <option value="02">Fev (02)</option>
@@ -180,14 +259,17 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="cvv">CVV</label>
                                                     <div class="col-sm-12">
-                                                        <input required type="text" class="form-control" name="cvv" id="cvv" placeholder="Código de segurança">
+                                                        <input required type="text" class="form-control" name="cvv"
+                                                               id="cvv" placeholder="Código de segurança">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-6 pl-0">
                                                 <div class="form-group">
                                                     <div class="col-sm-12 mt-4 pt-2">
-                                                        <button type="button" class="btn btn-outline-success btn-block">Pagar</button>
+                                                        <button type="button" class="btn btn-outline-success btn-block">
+                                                            Pagar
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,18 +288,24 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="col-xs-12">Nome do produto: </div>
-                                            <div class="col-xs-12"><small>Quantidade:<span>1</span></small></div>
+                                            <div class="col-xs-12">Nome do produto:</div>
+                                            <div class="col-xs-12">
+                                                <small>Quantidade:<span>1</span></small>
+                                            </div>
                                         </div>
                                         <div class="col-sm-3 col-xs-3 text-right">
                                             <h6><span>R$</span> 25.00</h6>
                                         </div>
                                     </div>
-                                    <div class="form-group"><hr /></div>
+                                    <div class="form-group">
+                                        <hr/>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="col-xs-12">Nome do produto: </div>
-                                            <div class="col-xs-12"><small>Quantidade:<span>1</span></small></div>
+                                            <div class="col-xs-12">Nome do produto:</div>
+                                            <div class="col-xs-12">
+                                                <small>Quantidade:<span>1</span></small>
+                                            </div>
                                         </div>
                                         <div class="col-sm-3 col-xs-3 text-right">
                                             <h6><span>R$</span> 25.00</h6>
@@ -236,18 +324,21 @@
                                     <fieldset>
                                         <legend>Pagamento via boleto bancário</legend>
 
-                                        <label class="col-sm-12 my-3 control-label" ><b>Informações de endereço</b></label>
+                                        <label class="col-sm-12 my-3 control-label"><b>Informações de
+                                            endereço</b></label>
 
                                         <div class="form-group">
                                             <label class="col-sm-12 control-label" for="CEP">CEP</label>
                                             <div class="col-sm-12">
-                                                <input required type="text" class="form-control" name="CEP" id="CEP" placeholder="CEP">
+                                                <input required type="text" class="form-control" name="CEP" id="CEP"
+                                                       placeholder="CEP">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-12 control-label" for="rua">Rua</label>
                                             <div class="col-sm-12">
-                                                <input required type="text" class="form-control" name="rua" id="rua" placeholder="Rua">
+                                                <input required type="text" class="form-control" name="rua" id="rua"
+                                                       placeholder="Rua">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -255,15 +346,19 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="number">Número</label>
                                                     <div class="col-sm-12">
-                                                        <input required type="text" class="form-control" name="number" id="number" placeholder="Número">
+                                                        <input required type="text" class="form-control" name="number"
+                                                               id="number" placeholder="Número">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6 pl-0">
                                                 <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="aditional">Complemento</label>
+                                                    <label class="col-sm-12 control-label"
+                                                           for="aditional">Complemento</label>
                                                     <div class="col-sm-12">
-                                                        <input required type="text" class="form-control" name="aditional" id="aditional" placeholder="Complemento">
+                                                        <input required type="text" class="form-control"
+                                                               name="aditional" id="aditional"
+                                                               placeholder="Complemento">
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,7 +368,8 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="state">Estado</label>
                                                     <div class="col-sm-12">
-                                                        <input required type="text" class="form-control" name="state" id="state" placeholder="Estado">
+                                                        <input required type="text" class="form-control" name="state"
+                                                               id="state" placeholder="Estado">
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,14 +377,16 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="city">Cidade</label>
                                                     <div class="col-sm-12">
-                                                        <input required type="text" class="form-control" name="city" id="city" placeholder="Cidade">
+                                                        <input required type="text" class="form-control" name="city"
+                                                               id="city" placeholder="Cidade">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-sm-12 px-5">
-                                                <input type="button" class="btn btn-outline-success btn-block" value="Gerar boleto">
+                                                <input type="button" class="btn btn-outline-success btn-block"
+                                                       value="Gerar boleto">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -305,18 +403,24 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="col-xs-12">Nome do produto: </div>
-                                            <div class="col-xs-12"><small>Quantidade:<span>1</span></small></div>
+                                            <div class="col-xs-12">Nome do produto:</div>
+                                            <div class="col-xs-12">
+                                                <small>Quantidade:<span>1</span></small>
+                                            </div>
                                         </div>
                                         <div class="col-sm-3 col-xs-3 text-right">
                                             <h6><span>R$</span> 25.00</h6>
                                         </div>
                                     </div>
-                                    <div class="form-group"><hr /></div>
+                                    <div class="form-group">
+                                        <hr/>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="col-xs-12">Nome do produto: </div>
-                                            <div class="col-xs-12"><small>Quantidade:<span>1</span></small></div>
+                                            <div class="col-xs-12">Nome do produto:</div>
+                                            <div class="col-xs-12">
+                                                <small>Quantidade:<span>1</span></small>
+                                            </div>
                                         </div>
                                         <div class="col-sm-3 col-xs-3 text-right">
                                             <h6><span>R$</span> 25.00</h6>
