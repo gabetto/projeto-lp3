@@ -20,25 +20,25 @@ public class KitController {
     @Autowired
     RaceRepository raceRepository;
 
-    @GetMapping(value = "")
-    public String kit(Model model){
-        model.addAttribute("tittle","Lista de kits");
+    @GetMapping
+    public String kit(Model model) {
+        model.addAttribute("tittle", "Lista de kits");
         model.addAttribute("kits", kitRepository.findAll());
         return "kit/listKit";
     }
 
     @GetMapping(value = "/add")
-    public String getKitAdd(Model model){
+    public String getKitAdd(Model model) {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar kit");
         model.addAttribute("botaoOperacao", "Adicionar kit");
-        model.addAttribute("corridas",raceRepository.findAll());
+        model.addAttribute("corridas", raceRepository.findAll());
         return "kit/formKit";
     }
 
     @PostMapping(value = "/add")
-    public String postKitAdd(Model model, @ModelAttribute Kit kit){
-        model.addAttribute("tittle", "Adicionar kit");
+    public String postKitAdd(Model model, @ModelAttribute Kit kit) {
+        System.out.println(kit);
         kitRepository.save(kit);
         return "redirect:/kit";
     }
@@ -49,15 +49,12 @@ public class KitController {
         model.addAttribute("title", "Editar kit");
         model.addAttribute("botaoOperacao", "Editar kit");
         Optional<Kit> kit = kitRepository.findById(id);
-        if (kit.isPresent()){
-            model.addAttribute("kit", kit.get());
-        }
+        kit.ifPresent(kit1 -> model.addAttribute("kit", kit1));
         return "kit/formKit";
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String postKitEdit(@ModelAttribute Kit kit, Model model,
-                              @PathVariable String id) throws Exception {
+    public String postKitEdit(@ModelAttribute Kit kit, Model model, @PathVariable String id) {
         if (id.equals(kit.getId())) {
             kitRepository.save(kit);
         } else {
@@ -72,10 +69,7 @@ public class KitController {
         model.addAttribute("tittle", "Excluir kit");
         model.addAttribute("botaoOperacao", "Excluir kit");
         Optional<Kit> kit = kitRepository.findById(id);
-        if (kit.isPresent()) {
-            model.addAttribute("kit", kit.get());
-        }
-
+        kit.ifPresent(kit1 -> model.addAttribute("kit", kit1));
         return "kit/formKit";
     }
 
