@@ -39,7 +39,7 @@ public class RankingController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getEdit(Model model, @PathVariable Long id) {
+    public String getEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar ranking");
         model.addAttribute("botaoOperacao", "Editar ranking");
@@ -62,7 +62,7 @@ public class RankingController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String getDelete(Model model, @PathVariable Long id) {
+    public String getDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir ranking");
         model.addAttribute("botaoOperacao", "excluit ranking");
