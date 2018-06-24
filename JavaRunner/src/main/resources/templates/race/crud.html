@@ -1,10 +1,8 @@
 <head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
-<center><h1 th:text="${title}">Operação</h1></center>
+<h1 th:text="${title}" class="text-center"></h1>
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-        </div>
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
@@ -14,127 +12,153 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Nome:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.name}" name="name" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Data:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.data}" type="date" name="data" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.data}" data-mask="00/00/0000" name="data" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Valor:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.price}" type="text" name="price" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.price}" type="text" name="price" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Máximo de inscritos:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.subscribes}" type="number" name="subscribes" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.subscribes}" data-mask="000000" name="subscribes"
+                                       class="form-control" th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Distância:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.length}" type="text" name="length" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.length}" name="length" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Organizador:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.organizer}" type="text" name="organizer" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.organizer}" type="text" name="organizer"
+                                       class="form-control" th:disabled="${operation} == delete"/>
 
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Tipo de chip:</label>
                             <div class="col-sm-8">
-                                <select th:value="${runner?.chip}" th:disabled="${operation} == delete" name="chip">
-                                    <option value="volvo">Descartável</option>
-                                    <option value="saab">Retornável</option>
+                                <select th:value="${runner?.chip}" class="form-control"
+                                        th:disabled="${operation} == delete"
+                                        name="chip">
+                                    <option value="DESCARTAVEL">Descartável</option>
+                                    <option value="RETORNAVEL">Retornável</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Descrição:</label>
                             <div class="col-sm-8">
-                                <textarea form="formRace" rows="3" th:value="${race?.description}" type="text" name="description" class="form-control" th:disabled="${operation} == delete"></textarea>
+                                <textarea rows="3" name="description" class="form-control"
+                                          th:text="${race?.description}" type="textarea"
+                                          th:disabled="${operation} == delete"></textarea>
 
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Cidade:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.city}" type="text" name="city" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.city}" type="text" name="city" class="form-control"
+                                       th:disabled="${operation} == delete"/>
 
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Estado:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.state}" type="text" name="state" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.state}" type="text" name="state" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Região:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.region}" type="text" name="region" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.region}" type="text" name="region" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Hora inicial:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.initialHour}" type="time" name="initialHour" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.initialHour}" data-mask="00:00" name="initialHour"
+                                       class="form-control" th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Cor:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.color}" type="color" name="color" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.color}" type="color" name="color" class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Hora final:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.finalHour}" type="hour" name="finalHour" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.finalHour}" data-mask="00:00" name="finalHour"
+                                       class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">CEP da largada:</label>
                             <div class="col-sm-8">
-                                <input th:value="${route?.startCep}" type="text" name="startCep" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.startCep}" data-mask="00000-000" name="startCep"
+                                       class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Informações da largada:</label>
                             <div class="col-sm-8">
-                                <textarea form="formRace" rows="3" th:value="${race?.startDescription}" type="text" name="startInfo" class="form-control" th:disabled="${operation} == delete"></textarea>
+                                <textarea form="formRace" rows="3" th:text="${race?.startDescription}"
+                                          name="startDescription" class="form-control"
+                                          th:disabled="${operation} == delete"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">CEP da chegada:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.finalCep}" type="text" name="finalCep" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.finalCep}" data-mask="00000-000" name="finalCep"
+                                       class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Informações da chegada:</label>
                             <div class="col-sm-8">
-                                <textarea form="formRace" rows="3" th:value="${race?.endDescription}" type="text" name="finalInfo" class="form-control" th:disabled="${operation} == delete"></textarea>
+                                <textarea form="formRace" rows="3" th:text="${race?.endDescription}" type="text"
+                                          name="endDescription" class="form-control"
+                                          th:disabled="${operation} == delete"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Data de retirada do kit:</label>
                             <div class="col-sm-8">
-                                <input th:value="${race?.kitWithdraw}" type="date" name="kitWithdraw" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${race?.kitWithdraw}" data-mask="00/00/0000" name="kitWithdraw"
+                                       class="form-control" th:disabled="${operation} == delete"/>
                             </div>
                         </div>
-                        <center>
-                            <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
-                            <a th:href="@{'~/race/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
-                        </center>
+                        <input type="submit" class="btn btn-primary text-center" th:value="${botaoOperacao}">
+                        <a th:href="@{'~/race/'}">
+                            <button type="button" class="btn btn-secondary">Voltar</button>
+                        </a>
                     </form>
                 </div>
                 <div class="col col-lg-2">
@@ -146,21 +170,4 @@
     </div>
 </div>
 <script th:src="@{~/js/jquery.mask.min.js}"></script>
-<script>
-    var options = {
-        onKeyPress: function (cpf, ev, el, op) {
-            var masks = ['000.000.000-000', '00.000.000/0000-00'],
-                mask = (cpf.length > 14) ? masks[1] : masks[0];
-            el.mask(mask, op);
-        }
-    };
-    $('.cpfOuCnpj').mask('000.000.000-000', options);
-    $('.rg').mask('ZZ-00.000.000', {
-        translation: {
-            'Z': {
-                pattern: /[A-Za-z]/, optional: true
-            }
-        }, placeholder: "UF-01-234-567"
-    });
-</script>
 <footer th:replace="fragments/footer :: footer"></footer>

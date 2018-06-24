@@ -35,7 +35,7 @@ public class RaceController {
     @GetMapping(value = "add")
     public String getRaceAdd(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("title", "Adicionar corrida");
+        model.addAttribute("title", "Adicionar Corrida");
         model.addAttribute("botaoOperacao", "Nova corrida");
         return "race/crud";
     }

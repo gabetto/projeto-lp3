@@ -15,32 +15,37 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Nome completo:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.name}" type="text" name="name"
+                                           class="form-control" th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">E-mail:</label>
                                 <div class="col-sm-8">
-                                    <textarea form="formProduct" rows="3" th:value="${administrator?.email}" type="email" name="type" class="form-control" th:disabled="${operation} == delete"></textarea>
+                                    <textarea form="formProduct" rows="3" th:value="${administrator?.email}"
+                                              type="email" name="type" class="form-control"
+                                              th:disabled="${operation} == delete"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">CPF:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.cpf}" type="text" name="cpf" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.cpf}" type="text" name="cpf" class="form-control"
+                                           th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">RG:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.rg}" type="text" name="rg" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.rg}" type="text" name="rg" class="form-control"
+                                           th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Sexo:</label>
                                 <div class="col-sm-8">
-
-                                    <select th:value="${administrator?.sex}" name="sex" class="form-control" th:disabled="${operation} == delete">
+                                    <select th:value="${administrator?.sex}" name="sex" class="form-control"
+                                            th:disabled="${operation} == delete">
                                         <option value="volvo">Feminino</option>
                                         <option value="saab">Masculino</option>
                                         <option value="opel">Outro</option>
@@ -50,32 +55,36 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Data de nascimento:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.birthDate}" type="date" name="birthDate" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.birthDate}" type="date" name="birthDate"
+                                           class="form-control" th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Login:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.login}" type="text" name="login" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.login}" type="text" name="login"
+                                           class="form-control" th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Senha:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.password}" type="password" name="password" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.password}" type="password" name="password"
+                                           class="form-control" th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Autenticação secundária:</label>
                                 <div class="col-sm-8">
-                                    <input th:value="${administrator?.callback}" type="password" name="callback" class="form-control" th:disabled="${operation} == delete"></input>
+                                    <input th:value="${administrator?.callback}" type="password" name="callback"
+                                           class="form-control" th:disabled="${operation} == delete"/>
                                 </div>
                             </div>
 
-                            <center>
-                                <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
-                                <a th:href="@{'~/administrator/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
-                            </center>
+                            <input type="submit" class="btn btn-primary text-center" th:value="${botaoOperacao}">
+                            <a th:href="@{'~/administrator/'}">
+                                <button type="button" class="btn btn-secondary">Voltar</button>
+                            </a>
                         </form>
                     </div>
                     <div class="col col-lg-2">
@@ -86,4 +95,21 @@
             </div>
         </div>
     </div>
+    <script>
+        var options = {
+            onKeyPress: function (cpf, ev, el, op) {
+                var masks = ['000.000.000-000', '00.000.000/0000-00'],
+                    mask = (cpf.length > 14) ? masks[1] : masks[0];
+                el.mask(mask, op);
+            }
+        };
+        $('.cpfOuCnpj').mask('000.000.000-000', options);
+        $('.rg').mask('ZZ-00.000.000', {
+            translation: {
+                'Z': {
+                    pattern: /[A-Za-z]/, optional: true
+                }
+            }, placeholder: "UF-01-234-567"
+        });
+    </script>
     <footer th:replace="fragments/footer :: footer"></footer>

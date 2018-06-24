@@ -22,10 +22,10 @@ public class DatabaseCommons implements Serializable {
     @Column(length = 36)
     private String id;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private Date updated;
 
     @PrePersist

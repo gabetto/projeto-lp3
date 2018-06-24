@@ -1,0 +1,120 @@
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
+<h1 th:text="${title}" class="text-center"></h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                </div>
+                <div class="col-md-auto">
+                    <form th:object="${runner}" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Nome:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.name}" type="text" name="name" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Apelido:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.nickname}" type="text" name="nickname" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">E-mail:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.email}" type="email" name="email" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Senha:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.password}" type="password" name="password"
+                                       class="form-control" th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Confirmação de senha:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.confirmPassword}" type="password" name="confirmPassword"
+                                       class="form-control" th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">CPF:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.cpf}" type="text" name="cpf" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">RG:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.rg}" type="text" name="rg" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Data de Nascimento:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.birthDate}" type="date" name="birthDate" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Sexo:</label>
+                            <div class="col-sm-8">
+                                <select th:value="${runner?.sex}" name="sex" class="form-control"
+                                        th:disabled="${operation} == delete">
+                                    <option value="FEMININO">Feminino</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="NAODEFINIDO">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Avatar:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${runner?.avatar}" type="text" name="avatar" class="form-control"
+                                       th:disabled="${operation} == delete"/>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary text-center" th:value="${botaoOperacao}">
+                        <a th:href="@{'~/runner/'}">
+                            <button type="button" class="btn btn-secondary">Voltar</button>
+                        </a>
+                    </form>
+                </div>
+                <div class="col col-lg-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
+<script>
+    var options = {
+        onKeyPress: function (cpf, ev, el, op) {
+            var masks = ['000.000.000-000', '00.000.000/0000-00'],
+                mask = (cpf.length > 14) ? masks[1] : masks[0];
+            el.mask(mask, op);
+        }
+    };
+    $('.cpfOuCnpj').mask('000.000.000-000', options);
+    $('.rg').mask('ZZ-00.000.000', {
+        translation: {
+            'Z': {
+                pattern: /[A-Za-z]/, optional: true
+            }
+        }, placeholder: "UF-01-234-567"
+    });
+</script>
+<footer th:replace="fragments/footer:: footer"></footer>

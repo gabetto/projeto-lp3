@@ -32,7 +32,7 @@ public class RunnerAuth {
     @GetMapping(value = "register")
     public String requestRegister(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("title", "Adicionar administrador");
+        model.addAttribute("title", "Novo discípulo de Tonhão, O Flash Acadêmico");
         model.addAttribute("botaoOperacao", "Adicionar administrador");
         return "runner/register";
     }
@@ -40,6 +40,7 @@ public class RunnerAuth {
     @PostMapping(value = "register")
     @ModelAttribute
     public String doRegister(Runner runner, HttpServletRequest req, Model model) throws Exception {
+        System.out.println(runner);
         HashMap<String, String> errors = runner.findErrors();
         if (errors.isEmpty()) {
             Runner register = repository.save(runner.setPassword
@@ -50,7 +51,7 @@ public class RunnerAuth {
         }
         model.addAttribute("errors", errors);
         model.addAttribute("runner", runner);
-        return "administrator/register";
+        return "runner/register";
     }
 
     @PostMapping
