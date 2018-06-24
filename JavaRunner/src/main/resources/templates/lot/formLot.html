@@ -14,33 +14,42 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Data inicial:</label>
                             <div class="col-sm-8">
-                                <input th:value="${lot?.initialDate}" type="date" name="initialDate" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${lot?.initialData}" data-mask="00/00/0000" name="initialData"
+                                       class="form-control" th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Data final:</label>
                             <div class="col-sm-8">
-                                <input th:value="${lot?.finalDate}" type="date" name="finalDate" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${lot?.dataFinal}" data-mask="00/00/0000" name="dataFinal"
+                                       class="form-control"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Desconto:</label>
                             <div class="col-sm-8">
-                                <input th:value="${lot?.discount}" type="number" name="discount" class="form-control" th:disabled="${operation} == delete"></input>
+                                <input th:value="${lot?.discount}"
+                                       name="discount"
+                                       class="form-control money2"
+                                       th:disabled="${operation} == delete"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Corrida:</label>
                             <div class="col-sm-8">
-                                <select th:disabled="${operation} == delete" name="route">
-                                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}" class="form-control" th:value="${corrida.id}"
+                                <select th:disabled="${operation} == delete" name="race" class="form-control">
+                                    <option th:if="${corridas} != null" th:each="corrida : ${corridas}"
+                                            class="form-control" th:value="${corrida.id}"
                                             th:text="${corrida.name}"></option>
                                 </select>
                             </div>
                         </div>
                         <center>
                             <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
-                            <a th:href="@{'~/lot/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
+                            <a th:href="@{'~/lot/'}">
+                                <button type="button" class="btn btn-secondary">Voltar</button>
+                            </a>
                         </center>
                     </form>
                 </div>
@@ -52,4 +61,10 @@
         </div>
     </div>
 </div>
+<script th:src="@{~/js/jquery.mask.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $('.money2').mask("###0.00", {reverse: true});
+    })
+</script>
 <footer th:replace="fragments/footer :: footer"></footer>
