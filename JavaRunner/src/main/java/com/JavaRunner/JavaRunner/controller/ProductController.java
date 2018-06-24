@@ -1,6 +1,7 @@
 package com.JavaRunner.JavaRunner.controller;
 
 import com.JavaRunner.JavaRunner.domain.model.Product;
+import com.JavaRunner.JavaRunner.domain.repository.KitRepository;
 import com.JavaRunner.JavaRunner.domain.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,24 +16,27 @@ public class ProductController {
 
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    KitRepository kitRepository;
 
-    @GetMapping(value = "")
-    public String product(Model model){
-        model.addAttribute("title","Lista de Produtos");
+    @GetMapping
+    public String product(Model model) {
+        model.addAttribute("title", "Lista de Produtos");
         model.addAttribute("products", productRepository.findAll());
         return "product/listProduct";
     }
 
     @GetMapping(value = "/add")
-    public String getProductAdd(Model model){
+    public String getProductAdd(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar Produto");
+        model.addAttribute("title", "Adicionar Produto");
         model.addAttribute("botaoOperacao", "Adicionar produto");
+        model.addAttribute("kits", kitRepository.findAll());
         return "product/formProduct";
     }
 
     @PostMapping(value = "/add")
-    public String postProductAdd(Model model, @ModelAttribute Product product){
+    public String postProductAdd(Model model, @ModelAttribute Product product) {
         model.addAttribute("tittle", "Adicionar produto");
         productRepository.save(product);
         return "redirect:/product";
@@ -44,7 +48,7 @@ public class ProductController {
         model.addAttribute("title", "Editar product");
         model.addAttribute("botaoOperacao", "Editar produto");
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()){
+        if (product.isPresent()) {
             model.addAttribute("product", product.get());
         }
         return "product/formProduct";
@@ -52,7 +56,7 @@ public class ProductController {
 
     @PostMapping(value = "/edit/{id}")
     public String postProductEdit(@ModelAttribute Product product, Model model,
-                              @PathVariable String id) throws Exception {
+                                  @PathVariable String id) throws Exception {
         if (id.equals(product.getId())) {
             productRepository.save(product);
         } else {

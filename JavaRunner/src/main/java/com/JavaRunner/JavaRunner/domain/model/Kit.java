@@ -21,6 +21,15 @@ public class Kit extends DatabaseCommons implements Serializable {
     private String description;
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Race.class)
     private Race race;
-    @OneToMany(mappedBy = "kit", targetEntity = Product.class)
+    @OneToMany
     private Collection<Product> products;
+
+    public Double getPrice() {
+        Double value = 0.0;
+        for (Product product : products) {
+            System.out.println(product);
+            value += product.getPrice();
+        }
+        return value;
+    }
 }

@@ -1,13 +1,18 @@
 package com.JavaRunner.JavaRunner.controller;
 
+import com.JavaRunner.JavaRunner.controller.requests.KitResponse;
 import com.JavaRunner.JavaRunner.domain.model.Kit;
+import com.JavaRunner.JavaRunner.domain.model.Product;
 import com.JavaRunner.JavaRunner.domain.repository.KitRepository;
+import com.JavaRunner.JavaRunner.domain.repository.ProductRepository;
 import com.JavaRunner.JavaRunner.domain.repository.RaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -16,29 +21,37 @@ public class KitController {
 
     @Autowired
     KitRepository kitRepository;
-
     @Autowired
     RaceRepository raceRepository;
+    @Autowired
+    ProductRepository products;
 
     @GetMapping
     public String kit(Model model) {
         model.addAttribute("tittle", "Lista de kits");
-        model.addAttribute("kits", kitRepository.findAll());
+        List<KitResponse> kits = new ArrayList<>();
+        for (Kit k : kitRepository.findAll()) {
+            Double price = 0.0;
+            for (Product p : products.findAllByKit(k)) {
+                price += p.getPrice();
+            }
+            kits.add(new KitResponse(k, price));
+        }
+        model.addAttribute("kits", kits);
         return "kit/listKit";
     }
 
     @GetMapping(value = "/add")
     public String getKitAdd(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar kit");
+        model.addAttribute("title", "Adicionar kit");
         model.addAttribute("botaoOperacao", "Adicionar kit");
         model.addAttribute("corridas", raceRepository.findAll());
         return "kit/formKit";
     }
 
     @PostMapping(value = "/add")
-    public String postKitAdd(Model model, @ModelAttribute Kit kit) {
-        System.out.println(kit);
+    public String postKitAdd(@ModelAttribute Kit kit) {
         kitRepository.save(kit);
         return "redirect:/kit";
     }

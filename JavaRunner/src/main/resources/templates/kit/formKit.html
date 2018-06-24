@@ -1,5 +1,4 @@
-<head xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-      th:replace="fragments/head:: head"></head>
+<head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <center><h1 th:text="${title}"></h1></center>
 <div class="container">
@@ -37,7 +36,17 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Corrida:</label>
                             <div class="col-sm-8">
-                                <select th:disabled="${operation} == delete" name="route">
+                                <select multiple="multiple" th:disabled="${operation} == delete" name="produtos[]"
+                                        class="form-control" id="produtos">
+                                    <option value='52b274ff-50f7-40c7-a73f-123a159e86df'>Tonhão Toy</option>
+                                    <option value='5654a22f-8c9c-4282-bd4d-4a3229ddddad'>Tonhão's Shoes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Corrida:</label>
+                            <div class="col-sm-8">
+                                <select th:disabled="${operation} == delete" name="race" class="form-control">
                                     <option th:if="${corridas} != null" th:each="corrida : ${corridas}"
                                             th:value="${corrida.id}"
                                             th:text="${corrida.name}"></option>
@@ -61,4 +70,9 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#pre-selected-options').multiSelect();
+    })
+</script>
 <footer th:replace="fragments/footer :: footer"></footer>
