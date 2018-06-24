@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getProductEdit(Model model, @PathVariable Long id) {
+    public String getProductEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar product");
         model.addAttribute("botaoOperacao", "Editar produto");
@@ -52,7 +52,7 @@ public class ProductController {
 
     @PostMapping(value = "/edit/{id}")
     public String postProductEdit(@ModelAttribute Product product, Model model,
-                              @PathVariable Long id) throws Exception {
+                              @PathVariable String id) throws Exception {
         if (id.equals(product.getId())) {
             productRepository.save(product);
         } else {
@@ -62,7 +62,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String getProductDelete(Model model, @PathVariable Long id) {
+    public String getProductDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir produto");
         model.addAttribute("botaoOperacao", "excluit produto");
@@ -75,7 +75,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "delete/{id}")
-    public String postProductDelete(@PathVariable Long id, @ModelAttribute Product product) {
+    public String postProductDelete(@PathVariable String id, @ModelAttribute Product product) {
         productRepository.delete(product);
         return "redirect:/product";
     }

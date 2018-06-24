@@ -44,7 +44,7 @@ public class KitController {
     }
 
     @GetMapping(value = "/edit/{id}")
-    public String getKitEdit(Model model, @PathVariable Long id) {
+    public String getKitEdit(Model model, @PathVariable String id) {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar kit");
         model.addAttribute("botaoOperacao", "Editar kit");
@@ -57,7 +57,7 @@ public class KitController {
 
     @PostMapping(value = "/edit/{id}")
     public String postKitEdit(@ModelAttribute Kit kit, Model model,
-                              @PathVariable Long id) throws Exception {
+                              @PathVariable String id) throws Exception {
         if (id.equals(kit.getId())) {
             kitRepository.save(kit);
         } else {
@@ -67,10 +67,10 @@ public class KitController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String getKitDelete(Model model, @PathVariable Long id) {
+    public String getKitDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir kit");
-        model.addAttribute("botaoOperacao", "excluit kit");
+        model.addAttribute("botaoOperacao", "Excluir kit");
         Optional<Kit> kit = kitRepository.findById(id);
         if (kit.isPresent()) {
             model.addAttribute("kit", kit.get());
@@ -80,7 +80,7 @@ public class KitController {
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postKitDelete(@PathVariable Long id, @ModelAttribute Kit kit) {
+    public String postKitDelete(@PathVariable String id, @ModelAttribute Kit kit) {
         kitRepository.delete(kit);
         return "redirect:/kit";
     }

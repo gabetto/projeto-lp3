@@ -13,3 +13,17 @@ h1, h2, h3, h4, h5, h6 {
         display: none !important;
     }
 }
+
+.table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+
+.form {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}

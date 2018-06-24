@@ -52,7 +52,7 @@ public class RankingController {
 
     @PostMapping(value = "/edit/{id}")
     public String postEdit(@ModelAttribute Ranking ranking, Model model,
-                           @PathVariable Long id) throws Exception {
+                           @PathVariable String id) throws Exception {
         if (id.equals(ranking.getId())) {
             rankingRepository.save(ranking);
         } else {
@@ -65,7 +65,7 @@ public class RankingController {
     public String getDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
         model.addAttribute("tittle", "Excluir ranking");
-        model.addAttribute("botaoOperacao", "excluit ranking");
+        model.addAttribute("botaoOperacao", "Excluir ranking");
         Optional<Ranking> ranking = rankingRepository.findById(id);
         if (ranking.isPresent()) {
             model.addAttribute("ranking", ranking.get());
@@ -75,7 +75,7 @@ public class RankingController {
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postDelete(@PathVariable Long id, @ModelAttribute Ranking ranking) {
+    public String postDelete(@PathVariable String id, @ModelAttribute Ranking ranking) {
         rankingRepository.delete(ranking);
         return "redirect:/ranking";
     }

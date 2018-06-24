@@ -1,137 +1,150 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Sistema de Corrida do Tonhão</title>
-    <link rel="stylesheet" th:href="@{~/css/tachyons.min.css}"/>
-    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{~/css/tonhao.min.css}"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Montserrat" rel="stylesheet">
-    <script th:src="@{~/js/jquery.min.js}"></script>
-    <script th:src="@{~/js/angular.min.js}"></script>
-    <script th:src="@{~/js/bootstrap.min.js}"></script>
-    <script th:src="@{~/js/popper.min.js}"></script>
-</head>
-</html>
-<!--<head th:replace="fragments/head:: head"></head>-->
+<head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
-<h1 th:text="${title}">Operação</h1>
-<form th:object="${race}" method="post">
-    <table>
-        <tr>
-            <td>Nome:</td>
-            <td><input th:value="${race?.name}" name="name" class="form-control" th:disabled="${operation} == excluir"/>
-        </tr>
-        <tr>
-            <td>Data:</td>
-            <td><input th:value="${race?.data}" data-toggle="datepicker" name="data" class="form-control"
-                       th:disabled="${operation} == excluir" data-mask="00/00/0000"/>
-        </tr>
-        <tr>
-            <td>Valor:</td>
-            <td><input th:value="${race?.price}" type="text" name="price" class="form-control"
-                       th:disabled="${operation} == excluir"/>
-        </tr>
-        <tr>
-            <td>Máximo de inscritos:</td>
-            <td><input th:value="${race?.subscribes}" type="text" name="subscribes"
-                       class="form-control" th:disabled="${operation} == excluir"/>
-        </tr>
+<center><h1 th:text="${title}">Operação</h1></center>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                </div>
+                <div class="col-md-auto">
+                    <form th:object="${race}" id="formRace" method="post">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Nome:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.name}" type="text" name="name" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Data:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.data}" type="date" name="data" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Valor:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.price}" type="text" name="price" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Máximo de inscritos:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.subscribes}" type="number" name="subscribes" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Distância:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.length}" type="text" name="length" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Organizador:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.organizer}" type="text" name="organizer" class="form-control" th:disabled="${operation} == delete"></input>
 
-        <tr>
-            <td>Kilometragem:</td>
-            <td><input th:value="${race?.length}" type="text" name="length"
-                       class="form-control" th:disabled="${operation} == excluir"/>
-        </tr>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Tipo de chip:</label>
+                            <div class="col-sm-8">
+                                <select th:value="${runner?.chip}" th:disabled="${operation} == delete" name="chip">
+                                    <option value="volvo">Descartável</option>
+                                    <option value="saab">Retornável</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Descrição:</label>
+                            <div class="col-sm-8">
+                                <textarea form="formRace" rows="3" th:value="${race?.description}" type="text" name="description" class="form-control" th:disabled="${operation} == delete"></textarea>
 
-        <tr>
-            <td>Organizador:</td>
-            <td><input th:value="${race?.organizer}" type="text" name="organizer"
-                       class="form-control" th:disabled="${operation} == excluir"/>
-        </tr>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Cidade:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.city}" type="text" name="city" class="form-control" th:disabled="${operation} == delete"></input>
 
-        <tr>
-            <td>Tipo de chip:</td>
-            <td><select th:value="${race?.chip}" name="chip" class="form-control"
-                        th:disabled="${operation} == excluir">
-                <option value="retornavel">Retornável</option>
-                <option value="descartavel">Descartável</option>
-            </select></td>
-        </tr>
-        <tr>
-            <td>Descrição:</td>
-            <td><input th:value="${race?.description}" type="text" name="description"
-                       class="form-control" th:disabled="${operation} == excluir"/><br></td>
-        </tr>
-        <tr>
-            <td>Cidade:</td>
-            <td><input th:value="${race?.city}" type="text" name="city" class="form-control"
-                       th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Estado:</td>
-            <td><input th:value="${race?.state}" type="text" name="state" class="form-control"
-                       th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Região:</td>
-            <td><input th:value="${race?.region}" type="text" name="region" class="form-control"
-                       th:disabled="${operation} == excluir"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Hora inicial:</td>
-            <td>
-                <input th:value="${race?.initialHour}" type="text" name="initialHour"
-                       data-mask="00:00" class="form-control" th:disabled="${operation} == excluir"/>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Cor:</td>
-            <td><input th:value="${race?.color}" type="color" name="color" class="form-control"
-                       th:disabled="${operation} == excluir"></td>
-        </tr>
-
-        <tr>
-            <td>Hora final:</td>
-            <td>
-                <input th:value="${race?.finalHour}" type="text" name="finalHour"
-                       class="form-control" th:disabled="${operation} == excluir"
-                       data-mask="00:00"/>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Cep de largada:</td>
-            <td><input th:value="${race?.startCep}" type="text" name="startCep"
-                       class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Descrição largada:</td>
-            <td><input th:value="${race?.startDescription}" type="text" name="startDescription"
-                       class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Cep de chegada:</td>
-            <td><input th:value="${race?.finalCep}" type="text" name="finalCep"
-                       class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Descrição chegada:</td>
-            <td><input th:value="${race?.endDescription}" type="text" name="endDescription"
-                       class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td>Data de retirada do kit:</td>
-            <td><input th:value="${race?.kitWithdraw}" type="text" name="kitWithdraw"
-                       class="form-control" th:disabled="${operation} == excluir"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" th:value="${botaoOperacao}"/></td>
-            <td><a href="/race/">Voltar</a></td>
-        </tr>
-    </table>
-</form>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Estado:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.state}" type="text" name="state" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Região:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.region}" type="text" name="region" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Hora inicial:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.initialHour}" type="time" name="initialHour" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Cor:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.color}" type="color" name="color" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Hora final:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.finalHour}" type="hour" name="finalHour" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">CEP da largada:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${route?.startCep}" type="text" name="startCep" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Informações da largada:</label>
+                            <div class="col-sm-8">
+                                <textarea form="formRace" rows="3" th:value="${race?.startDescription}" type="text" name="startInfo" class="form-control" th:disabled="${operation} == delete"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">CEP da chegada:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.finalCep}" type="text" name="finalCep" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Informações da chegada:</label>
+                            <div class="col-sm-8">
+                                <textarea form="formRace" rows="3" th:value="${race?.endDescription}" type="text" name="finalInfo" class="form-control" th:disabled="${operation} == delete"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Data de retirada do kit:</label>
+                            <div class="col-sm-8">
+                                <input th:value="${race?.kitWithdraw}" type="date" name="kitWithdraw" class="form-control" th:disabled="${operation} == delete"></input>
+                            </div>
+                        </div>
+                        <center>
+                            <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
+                            <a th:href="@{'~/race/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
+                        </center>
+                    </form>
+                </div>
+                <div class="col col-lg-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>
 <script th:src="@{~/js/jquery.mask.min.js}"></script>
 <script>
     var options = {

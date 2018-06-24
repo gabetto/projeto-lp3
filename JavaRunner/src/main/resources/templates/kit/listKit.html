@@ -1,64 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Kits</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{'~/'}">SCCR</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="administrator">Administradores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="runner">Corredores<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="race">Corridas<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="kit">Kits<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="lot">Lotes<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="product">Produtos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="ranking">Rankings<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="route">Percursos<span class="sr-only">(current)</span></a>
-            </li>
-            <li>
-                <a class="nav-link active" href="rule">Regras<span class="sr-only">(current)</span></a>
-            </li>
-
-    </div>
-</nav>
+<head th:replace="fragments/head:: head"></head>
+<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <center><h1>Lista de Kits</h1></center>
 
-<center><table border="1" th:if="${!kits.isEmpty()}">
-    <tr><td>Tipo</td><td colspan="2">Acao</td></tr>
+<table class="table table-striped" th:if="${!kits.isEmpty()}">
+    <thead>
+    <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Ação</th>
+    </tr>
+    </thead>
+    <tbody>
     <tr th:each="kit : ${kits}">
         <td th:text="${kit.name}">Nome</td>
         <td th:text="${kit.type}">Tipo</td>
-        <td th:text="${kit.description}">Descrição</td>
-        <td><a th:href="@{'/kit/edit/' + ${kit.id}}" >Editar</a></td>
-        <td><a th:href="@{'/kit/delete/' + ${kit.id}}">Excluir</a></td>
+        <td><a th:href="@{'/kit/edit/' + ${kit.id}}" >Editar</a> || <a th:href="@{'/kit/delete/' + ${kit.id}}">Excluir</a></td>
     </tr>
-</table></center>
-<center><h2 th:unless="${!kits.isEmpty()}">Sem Kits</h2></center>
-
-<center><a th:href="@{'~/kit/add/'}">Adicionar</a></center>
-<center><td><a th:href="@{'~/'}">Página Inicial</a></td></center>
-</body>
-</html>
+    </tbody>
+</table>
+<center>
+    <h2 th:unless="${!kits.isEmpty()}">Sem Kits</h2>
+    <a class="text-center" th:href="@{'~/kit/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/kit/add/'}">Adicionar</button></a>
+    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/kit/add/'}">Página Inicial</button></a></center>
+</center>
+<footer th:replace="fragments/footer :: footer"></footer>
