@@ -1,4 +1,4 @@
-<head th:replace="fragments/head:: head"></head>
+<head th:replace="fragments/head:: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <center><h1>Lista de Produtos</h1></center>
 
@@ -8,7 +8,8 @@
         <th scope="col">Nome</th>
         <th scope="col">Descrição</th>
         <th scope="col">Preço</th>
-        <th scope="col">Ação</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Excluir</th>
     </tr>
     </thead>
     <tbody>
@@ -16,13 +17,18 @@
         <td th:text="${product.nome}">Nome</td>
         <td th:text="${product.description}">Descrição</td>
         <td th:text="${product.price}">Preco</td>
-        <td><a th:href="@{'/product/edit/' + ${product.id}}" >Editar</a> || <a th:href="@{'/product/delete/' + ${product.id}}">Excluir</a></td>
+        <td><a th:href="@{'/product/edit/' + ${product.id}}">Editar</a></td>
+        <td><a th:href="@{'/product/delete/' + ${product.id}}"><i class="fas fa-trash"></i></a></td>
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center mt2">
     <h2 th:unless="${!products.isEmpty()}">Sem Produtos</h2>
-    <a class="text-center" th:href="@{'~/product/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/product/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/product/add/'}">Página Inicial</button></a></center>
-</center>
+    <a class="text-center" th:href="@{'~/product/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/product/add/'}">Adicionar</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary" th:href="@{'~/product/add/'}">Página Inicial</button>
+    </a>
+</div>
 <footer th:replace="fragments/footer :: footer"></footer>

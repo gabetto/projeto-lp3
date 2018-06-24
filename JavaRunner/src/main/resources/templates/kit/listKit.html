@@ -7,20 +7,30 @@
     <tr>
         <th scope="col">Nome</th>
         <th scope="col">Tipo</th>
-        <th scope="col">Ação</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Excluir</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="kit : ${kits}">
         <td th:text="${kit.name}">Nome</td>
         <td th:text="${kit.type}">Tipo</td>
-        <td><a th:href="@{'/kit/edit/' + ${kit.id}}" >Editar</a> || <a th:href="@{'/kit/delete/' + ${kit.id}}">Excluir</a></td>
+        <td th:text="${kit.description}">Tipo</td>
+        <td th:text="${kit.price}">Tipo</td>
+        <td><a th:href="@{'/kit/edit/' + ${kit.id}}"><i class="fas fa-pen"></i></a></td>
+        <td><a th:href="@{'/kit/delete/' + ${kit.id}}"><i class="fas fa-trash"></i></a></td>
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center mt2">
     <h2 th:unless="${!kits.isEmpty()}">Sem Kits</h2>
-    <a class="text-center" th:href="@{'~/kit/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/kit/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/kit/add/'}">Página Inicial</button></a></center>
+    <a class="text-center" th:href="@{'~/kit/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/kit/add/'}">Adicionar</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary" th:href="@{'~/kit/add/'}">Página Inicial</button>
+    </a></div>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>
