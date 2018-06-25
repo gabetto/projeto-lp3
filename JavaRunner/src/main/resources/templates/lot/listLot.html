@@ -12,16 +12,16 @@
     </thead>
     <tbody>
     <tr th:each="lot : ${lots}">
-        <td th:text="${lot.initialDate}">Data inicial</td>
+        <td th:text="${lot.initialData}">Data inicial</td>
         <td th:text="${lot.dataFinal}">Data final</td>
         <td th:text="${lot.discount}">Desconto</td>
         <td><a th:href="@{'/lot/edit/' + ${lot.id}}" >Editar</a> || <a th:href="@{'/lot/delete/' + ${lot.id}}">Excluir</a></td>
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center mt2">
     <h2 th:unless="${!lots.isEmpty()}">Sem Lotes</h2>
     <a class="text-center" th:href="@{'~/lot/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/lot/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/lot/add/'}">Página Inicial</button></a></center>
+    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/lot/add/'}">Página Inicial</button></a></div>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

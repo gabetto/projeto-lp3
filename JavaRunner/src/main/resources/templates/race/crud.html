@@ -173,7 +173,7 @@
 <script th:src="@{~/js/jquery.mask.min.js}"></script>
 <script>
     $(document).ready(function () {
-        $('.money2').mask("#.##0,00", {reverse: true});
+        $('.money2').mask("###0.00", {reverse: true});
     })
 </script>
 <footer th:replace="fragments/footer :: footer"></footer>

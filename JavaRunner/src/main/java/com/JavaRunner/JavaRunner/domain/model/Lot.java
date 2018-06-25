@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
 @Table(name = "lots")
+@EqualsAndHashCode(callSuper = true)
 public class Lot extends DatabaseCommons {
     @Column(nullable = false, length = 20)
     private String initialData;
