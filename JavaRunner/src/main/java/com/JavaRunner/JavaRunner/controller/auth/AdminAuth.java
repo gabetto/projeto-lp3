@@ -48,6 +48,7 @@ public class AdminAuth {
             req.getSession().setAttribute("admin", register);
             return "redirect:/admin";
         }
+        System.out.println(errors);
         model.addAttribute("errors", errors);
         model.addAttribute("administrator", admin);
         return "administrator/register";
