@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "rule")
-public class    RuleController {
+@RequestMapping(value = "admin/rule")
+public class RuleController {
 
     @Autowired
     RuleRepository ruleRepository;
 
     @GetMapping(value = "")
-    public String rule(Model model){
-        model.addAttribute("tittle","Lista de regras");
+    public String rule(Model model) {
+        model.addAttribute("tittle", "Lista de regras");
         model.addAttribute("rules", ruleRepository.findAll());
         return "rule/listRule";
     }
 
     @GetMapping(value = "/add")
-    public String getAdd(Model model){
+    public String getAdd(Model model) {
         model.addAttribute("operation", "add");
         model.addAttribute("tittle", "Adicionar regra");
         model.addAttribute("botaoOperacao", "Adicionar regra");
@@ -32,7 +32,7 @@ public class    RuleController {
     }
 
     @PostMapping(value = "/add")
-    public String postAdd(Model model, @ModelAttribute Rule rule){
+    public String postAdd(Model model, @ModelAttribute Rule rule) {
         ruleRepository.save(rule);
         return "redirect:/rule";
     }
@@ -42,8 +42,8 @@ public class    RuleController {
         model.addAttribute("operation", "edit");
         model.addAttribute("title", "Editar regra");
         model.addAttribute("botaoOperacao", "Editar regra");
-        Optional<Rule> rule= ruleRepository.findById(id);
-        if (rule.isPresent()){
+        Optional<Rule> rule = ruleRepository.findById(id);
+        if (rule.isPresent()) {
             model.addAttribute("rule", rule.get());
         }
         return "rule/formRule";

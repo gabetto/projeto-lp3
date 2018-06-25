@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -67,23 +68,30 @@ public class AdministratorController {
 
     @PostMapping(value = "/edit/{id}")
     public String postEdit(@ModelAttribute Administrator admin, Model model,
-                           @PathVariable String id) throws Exception {
-        HashMap<String, String> errors = admin.findErrors();
-        if (id.equals(admin.getId())) {
-            if (errors.isEmpty()) {
-                administratorRepository.save(admin.beautify());
-                return "redirect:/admin";
+                           @PathVariable String id, HttpServletRequest request) throws Exception {
+        Administrator administrator = (Administrator) request.getSession().getAttribute("admin");
+        if (administrator.getId().equals(id)) {
+            HashMap<String, String> errors = admin.findErrors();
+            if (id.equals(admin.getId())) {
+                if (errors.isEmpty()) {
+                    administratorRepository.save(admin.beautify());
+                    return "redirect:/admin";
+                }
             }
+            model.addAttribute("errors", errors);
+            model.addAttribute("administrator", admin);
         }
-        model.addAttribute("errors", errors);
-        model.addAttribute("administrator", admin);
+        model.addAttribute("operation", "edit");
+        model.addAttribute("title", "Editar administrador");
+        model.addAttribute("botaoOperacao", "Editar administrador");
+        model.addAttribute("erro", "Você não pode excluir a conta de outro administrador");
         return "administrator/crud";
     }
 
     @GetMapping(value = "/delete/{id}")
     public String getDelete(Model model, @PathVariable String id) {
         model.addAttribute("operation", "delete");
-        model.addAttribute("tittle", "Excluir administrador");
+        model.addAttribute("title", "Excluir administrador");
         model.addAttribute("botaoOperacao", "excluir administrador");
         Optional<Administrator> admin = administratorRepository.findById(id);
         admin.ifPresent(administrator -> model.addAttribute("administrator", administrator));
@@ -91,8 +99,17 @@ public class AdministratorController {
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postDelete(@PathVariable String id) {
-        administratorRepository.deleteById(id);
-        return "redirect:/admin";
+    public String postDelete(@PathVariable String id, HttpServletRequest request, Model model) {
+        Administrator adminReq = (Administrator) request.getSession().getAttribute("admin");
+        if (adminReq.getId().equals(id)) {
+            administratorRepository.deleteById(id);
+            request.getSession().removeAttribute("admin");
+            return "redirect:/";
+        }
+        model.addAttribute("operation", "delete");
+        model.addAttribute("title", "Excluir administrador");
+        model.addAttribute("botaoOperacao", "excluir administrador");
+        model.addAttribute("erro", "Você não pode excluir a conta de outro administrador");
+        return "administrator/crud";
     }
 }

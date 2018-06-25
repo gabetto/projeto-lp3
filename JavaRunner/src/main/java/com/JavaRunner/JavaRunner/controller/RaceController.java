@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "race")
+@RequestMapping(value = "admin/race")
 public class RaceController {
     private RaceRepository raceRepository;
 
@@ -22,7 +22,7 @@ public class RaceController {
 
     private Model indexModel(Model model) {
         model.addAttribute("title", "Lista de corridas");
-        model.addAttribute("races", raceRepository.findAll());
+        model.addAttribute("races", raceRepository.findAllByOrderByDataDesc());
         return model;
     }
 

@@ -1,6 +1,66 @@
 <head th:replace="fragments/head:: head"></head>
-<navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
-<h1 class="text-center">Sistema de Corrida do Tonhão</h1>
-</body>
-</html>
+<header class="sans-serif">
+    <div class="cover bg-left bg-center-l" style="background-image: url('/img/Runer.jpeg')">
+        <div class="bg-black-70 pb5 pb6-m pb7-l">
+            <nav class="dt w-100 mw8 center">
+                <div class="dtc w2 v-mid pa3">
+                    <a href="/" class="dib w2 h2 pa1 grow-large border-box">
+                        <i class="fas fa-angry white-60"></i>
+                    </a>
+                </div>
+                <div class="dtc v-mid tr pa3">
+                    <a class="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
+                       th:href="@{'~/auth/runner/register'}">Cadastrar</a>
+                    <a class="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3 ba b--white-60"
+                       th:href="@{'~/auth/runner'}">Login</a>
+                </div>
+            </nav>
+            <div class=" tc-l mt4 mt5-m mt6-l ph3">
+                <h1 class="f2 f1-l fw2 white-90 mb0 lh-title b"><strong>Tonhão Runner</strong></h1>
+                <h2 class="fw1 f3 white-80 mt3 mb4">
+                    <small>O Sistema de Corrida de Rua do Tonhão, <strong>O Flash Acadêmico</strong></small>
+                </h2>
+                <a class="f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3"
+                   th:href="@{'~/auth/runner/register'}">Competir
+                    por Emprego</a>
+                <span class="dib v-mid ph3 white-70 mb3">or</span>
+                <a class="f6 no-underline grow dib v-mid white ba b--white ph3 pv2 mb3"
+                   th:href="@{'~/auth/admin'}">Tentar invadir o
+                    sistema</a>
+            </div>
+        </div>
+    </div>
+</header>
+<h1 class="text-center"></h1>
+<h4 class="text-center">
+
+</h4>
+<hr/>
+<h2 class="b text-center">Próximas Corridas</h2>
+<hr/>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 offset-md-4 col-md-4 offset-lg-4 col-lg-4">
+        <div th:each="race : ${races}">
+            <div class="row tl">
+                <div class="date">
+                    <span class="binds"></span>
+                    <span class="month" th:style="|background-color:${race?.color}|">Dia</span>
+                    <h2 class="day" style="font-size:2.5em">
+                        <span th:text="${race?.data.split('/')[0] + '/' +race?.data.split('/')[1]}"></span>
+                    </h2>
+                </div>
+                <div class="nome-corrida tl center measure">
+                    <strong th:text="${race?.name}" class="text-center"></strong>
+                    <h5>Data: <strong><span th:text="${race?.data}"></span></strong></h5>
+                    <h5>Hora: <strong><span th:text="${race?.initialHour}"></span></strong></h5>
+                    <h6 th:text="${race?.description}"></h6>
+                </div>
+                <a class="material-dark-cyan" th:href="@{'/subscribe/' + ${race.id}}">
+                    <i class="fa fa-plus"></i>
+                    Inscrever-se</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer th:replace="fragments/footer :: footer"></footer>

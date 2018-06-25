@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "kit")
+@RequestMapping(value = "admin/kit")
 public class KitController {
 
     @Autowired

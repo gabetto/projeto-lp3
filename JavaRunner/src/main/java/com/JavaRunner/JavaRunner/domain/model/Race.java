@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 
 @Data
@@ -55,6 +54,8 @@ public class Race extends DatabaseCommons implements Validator<Race> {
     private String endDescription;
     @Column(length = 15, nullable = false)
     private String kitWithdraw;
+    @Column(length = 256)
+    private String image;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
     private Collection<Route> routes;

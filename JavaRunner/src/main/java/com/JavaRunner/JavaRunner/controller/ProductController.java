@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "product")
+@RequestMapping(value = "admin/product")
 public class ProductController {
 
     @Autowired

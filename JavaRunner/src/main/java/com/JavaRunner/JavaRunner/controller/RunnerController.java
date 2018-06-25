@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "runner")
+@RequestMapping(value = "admin/runner")
 public class RunnerController {
 
     private final RunnerRepository runnerRepository;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "ranking")
+@RequestMapping(value = "admin/ranking")
 public class RankingController {
 
     @Autowired

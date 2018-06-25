@@ -1,26 +1,32 @@
 <head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
-<h1>Lista de Administradores</h1>
+<h1 class="text-center">Lista de Administradores</h1>
 
 <table class="table table-striped" th:if="${!administrators.isEmpty()}">
     <thead>
     <tr>
         <th scope="col">Nome</th>
         <th scope="col">E-mail</th>
-        <th scope="col">Ação</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Excluir</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="administrator : ${administrators}">
         <td th:text="${administrator.name}">Nome</td>
-        <td th:text="${administrator.type}">E-mail</td>
-        <td><a th:href="@{'/administrator/edit/' + ${administrator.id}}" >Editar</a> || <a th:href="@{'/administrator/delete/' + ${administrator.id}}">Excluir</a></td>
+        <td th:text="${administrator.email}">E-mail</td>
+        <td><a th:href="@{'/admin/edit/' + ${administrator.id}}"><i class="fa fa-pen"></i></a></td>
+        <td><a th:href="@{'/admin/delete/' + ${administrator.id}}"><i class="fas fa-trash"></i></a></td>
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center mt2">
     <h2 th:unless="${!administrators.isEmpty()}">Sem Administradores</h2>
-    <a class="text-center" th:href="@{'~/administrator/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/administrator/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/administrator/add/'}">Página Inicial</button></a></center>
-</center>
+    <a class="text-center" th:href="@{'~/administrator/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/administrator/add/'}">Adicionar</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary" th:href="@{'~/administrator/add/'}">Página Inicial</button>
+    </a>
+</div>
 <footer th:replace="fragments/footer :: footer"></footer>

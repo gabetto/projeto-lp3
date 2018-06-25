@@ -32,7 +32,7 @@ public class AdminAuth {
     @GetMapping(value = "register")
     public String requestRegister(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar administrador");
+        model.addAttribute("title", "Adicionar administrador");
         model.addAttribute("botaoOperacao", "Adicionar administrador");
         return "administrator/register";
     }
@@ -40,17 +40,22 @@ public class AdminAuth {
     @PostMapping(value = "register")
     public String doRegister(@ModelAttribute Administrator admin, HttpServletRequest req, Model model) throws
             Exception {
-        HashMap<String, String> errors = admin.findErrors();
-        if (errors.isEmpty()) {
-            Administrator register = repository.save(admin
-                    .setPassword(BCrypt.hashpw(admin.getPassword(), Salt.saltAdmin))
-                    .beautify());
-            req.getSession().setAttribute("admin", register);
-            return "redirect:/admin";
+        if (repository.count() == 0) {
+            HashMap<String, String> errors = admin.findErrors();
+            if (errors.isEmpty()) {
+                Administrator register = repository.save(admin
+                        .setPassword(BCrypt.hashpw(admin.getPassword(), Salt.saltAdmin))
+                        .beautify());
+                req.getSession().setAttribute("admin", register);
+                return "redirect:/admin";
+            }
+            System.out.println(errors);
+            model.addAttribute("errors", errors);
+            model.addAttribute("administrator", admin);
+            model.addAttribute("operation", "add");
+            model.addAttribute("title", "Adicionar administrador");
+            model.addAttribute("botaoOperacao", "Adicionar administrador");
         }
-        System.out.println(errors);
-        model.addAttribute("errors", errors);
-        model.addAttribute("administrator", admin);
         return "administrator/register";
     }
 

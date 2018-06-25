@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "lot")
+@RequestMapping(value = "admin/lot")
 public class LotController {
 
     @Autowired
