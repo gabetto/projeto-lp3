@@ -21,7 +21,7 @@
 </table>
 <div class="text-center mt2">
     <h2 th:unless="${!lots.isEmpty()}">Sem Lotes</h2>
-    <a class="text-center" th:href="@{'~/lot/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/lot/add/'}">Adicionar</button></a>
+    <a class="text-center" th:href="@{'~/admin/lot/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/lot/add/'}">Adicionar</button></a>
     <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/lot/add/'}">Página Inicial</button></a></div>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

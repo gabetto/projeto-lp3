@@ -16,13 +16,18 @@
         <td th:text="${ranking.rankingName}">Nome</td>
         <td th:text="${ranking.organizer}">Organizador</td>
         <td th:text="${ranking.city}">Cidade</td>
-        <td><a th:href="@{'/ranking/edit/' + ${ranking.id}}" >Editar</a> || <a th:href="@{'/ranking/delete/' + ${ranking.id}}">Excluir</a></td>
+        <td><a th:href="@{'~/admin/ranking/edit/' + ${ranking.id}}">Editar</a> || <a
+                th:href="@{'~/admin/ranking/delete/' + ${ranking.id}}">Excluir</a></td>
     </tr>
     </tbody>
 </table>
 <center>
     <h2 th:unless="${!rankings.isEmpty()}">Sem Rankings</h2>
-    <a class="text-center" th:href="@{'~/ranking/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/ranking/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/ranking/add/'}">Página Inicial</button></a></center>
+    <a class="text-center" th:href="@{'~/admin/ranking/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/admin/ranking/add/'}">Adicionar</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary">Página Inicial</button>
+    </a></center>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

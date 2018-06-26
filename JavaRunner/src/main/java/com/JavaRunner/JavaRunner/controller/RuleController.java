@@ -18,7 +18,7 @@ public class RuleController {
 
     @GetMapping(value = "")
     public String rule(Model model) {
-        model.addAttribute("tittle", "Lista de regras");
+        model.addAttribute("title", "Lista de regras");
         model.addAttribute("rules", ruleRepository.findAll());
         return "rule/listRule";
     }
@@ -26,15 +26,15 @@ public class RuleController {
     @GetMapping(value = "/add")
     public String getAdd(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar regra");
+        model.addAttribute("title", "Adicionar regra");
         model.addAttribute("botaoOperacao", "Adicionar regra");
         return "rule/formRule";
     }
 
     @PostMapping(value = "/add")
-    public String postAdd(Model model, @ModelAttribute Rule rule) {
+    public String postAdd(@ModelAttribute Rule rule) {
         ruleRepository.save(rule);
-        return "redirect:/rule";
+        return "redirect:/admin/rule";
     }
 
     @GetMapping(value = "/edit/{id}")
@@ -43,9 +43,7 @@ public class RuleController {
         model.addAttribute("title", "Editar regra");
         model.addAttribute("botaoOperacao", "Editar regra");
         Optional<Rule> rule = ruleRepository.findById(id);
-        if (rule.isPresent()) {
-            model.addAttribute("rule", rule.get());
-        }
+        rule.ifPresent(r -> model.addAttribute("rule", r));
         return "rule/formRule";
     }
 
@@ -57,7 +55,7 @@ public class RuleController {
         } else {
             model.addAttribute("error", "Dados incorretos");
         }
-        return "redirect:/rule";
+        return "redirect:/admin/rule";
     }
 
     @GetMapping(value = "/delete/{id}")
@@ -66,16 +64,13 @@ public class RuleController {
         model.addAttribute("tittle", "Excluir regra");
         model.addAttribute("botaoOperacao", "Excluir regra");
         Optional<Rule> rule = ruleRepository.findById(id);
-        if (rule.isPresent()) {
-            model.addAttribute("rule", rule.get());
-        }
-
+        rule.ifPresent(r -> model.addAttribute("rule", r));
         return "rule/formRule";
     }
 
     @PostMapping(value = "/delete/{id}")
-    public String postDelete(@PathVariable String id, @ModelAttribute Rule rule) {
-        ruleRepository.delete(rule);
-        return "redirect:/rule";
+    public String postDelete(@PathVariable String id) {
+        ruleRepository.deleteById(id);
+        return "redirect:/admin/rule";
     }
 }

@@ -1,6 +1,6 @@
 <head th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
-<center><h1 th:text="${tittle}"> Operação </h1></center>
+<h1 th:text="${title}" class="text-center"></h1>
 <div class="container">
     <div class="row">
         <div class="col-sm">
@@ -14,13 +14,17 @@
                         <div class="form-group row">
                             <label class="col-form-label">Descrição:</label>
                             <div class="col-sm-8">
-                                <textarea form="formRanking" rows="3" th:value="${rule?.description}" type="text" name="description" class="form-control" th:disabled="${operation} == delete"></textarea>
+                                <textarea form="formRanking" rows="3" th:value="${rule?.description}" type="text"
+                                          name="description" class="form-control" th:text="${rule?.description}"
+                                          th:disabled="${operation} == delete"></textarea>
                             </div>
                         </div>
-                        <center>
+                        <div class="text-center">
                             <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
-                            <a th:href="@{'~/rule/'}"><button type="button" class="btn btn-secondary" >Voltar</button></a>
-                        </center>
+                            <a th:href="@{'~/admin/rule/'}">
+                                <button type="button" class="btn btn-secondary">Voltar</button>
+                            </a>
+                        </div>
                     </form>
                 </div>
                 <div class="col col-lg-2">

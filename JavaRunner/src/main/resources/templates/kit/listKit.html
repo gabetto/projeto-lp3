@@ -26,11 +26,11 @@
 </table>
 <div class="text-center mt2">
     <h2 th:unless="${!kits.isEmpty()}">Sem Kits</h2>
-    <a class="text-center" th:href="@{'~/kit/add/'}">
-        <button type="button" class="btn btn-primary" th:href="@{'~/kit/add/'}">Adicionar</button>
+    <a class="text-center" th:href="@{'~/admin/kit/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/admin/kit/add/'}">Adicionar</button>
     </a>
     <a class="text-center" th:href="@{'~/'}">
-        <button type="button" class="btn btn-secondary" th:href="@{'~/kit/add/'}">Página Inicial</button>
+        <button type="button" class="btn btn-secondary" th:href="@{'~/admin/kit/add/'}">Página Inicial</button>
     </a></div>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

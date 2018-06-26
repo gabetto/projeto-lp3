@@ -2,14 +2,14 @@ package com.JavaRunner.JavaRunner.controller.auth;
 
 import com.JavaRunner.JavaRunner.domain.model.Administrator;
 import com.JavaRunner.JavaRunner.domain.repository.AdministratorRepository;
-import com.JavaRunner.JavaRunner.utils.validations.Salt;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -44,12 +44,12 @@ public class AdminAuth {
             HashMap<String, String> errors = admin.findErrors();
             if (errors.isEmpty()) {
                 Administrator register = repository.save(admin
-                        .setPassword(BCrypt.hashpw(admin.getPassword(), Salt.saltAdmin))
+                        .setPassword(Hashing.sha256()
+                                .hashString(admin.getPassword(), StandardCharsets.UTF_8).toString())
                         .beautify());
                 req.getSession().setAttribute("admin", register);
                 return "redirect:/admin";
             }
-            System.out.println(errors);
             model.addAttribute("errors", errors);
             model.addAttribute("administrator", admin);
             model.addAttribute("operation", "add");
@@ -62,8 +62,8 @@ public class AdminAuth {
 
     @PostMapping
     public String doLogin(@RequestParam String login, @RequestParam String password, HttpServletRequest request) {
-        String hashed = BCrypt.hashpw(password, Salt.saltAdmin);
-        Optional<Administrator> admin = repository.findByLoginAndPassword(login, hashed);
+        Optional<Administrator> admin = repository.findByLoginAndPassword(login,
+                Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
         if (admin.isPresent()) {
             request.setAttribute("admin", admin.get());
             return "redirect:/admin";

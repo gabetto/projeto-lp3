@@ -36,30 +36,19 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Corrida:</label>
                             <div class="col-sm-8">
-                                <select multiple="multiple" th:disabled="${operation} == delete" name="produtos[]"
-                                        class="form-control" id="produtos">
-                                    <option value='52b274ff-50f7-40c7-a73f-123a159e86df'>Tonhão Toy</option>
-                                    <option value='5654a22f-8c9c-4282-bd4d-4a3229ddddad'>Tonhão's Shoes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Corrida:</label>
-                            <div class="col-sm-8">
                                 <select th:disabled="${operation} == delete" name="race" class="form-control">
                                     <option th:if="${corridas} != null" th:each="corrida : ${corridas}"
-                                            th:value="${corrida.id}"
-                                            th:text="${corrida.name}"></option>
+                                            th:value="${corrida?.id}"
+                                            th:text="${corrida?.name}"></option>
                                 </select>
                             </div>
                         </div>
-
-                        <center>
+                        <div class="text-center">
                             <input type="submit" class="btn btn-primary" th:value="${botaoOperacao}">
-                            <a th:href="@{'~/kit/'}">
+                            <a th:href="@{'~/admin/kit/'}">
                                 <button type="button" class="btn btn-secondary">Voltar</button>
                             </a>
-                        </center>
+                        </div>
                     </form>
                 </div>
                 <div class="col col-lg-2">

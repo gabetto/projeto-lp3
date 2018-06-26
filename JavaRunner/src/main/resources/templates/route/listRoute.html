@@ -8,7 +8,9 @@
         <th scope="col">Nome</th>
         <th scope="col">Distância</th>
         <th scope="col">Descrição</th>
-        <th scope="col">Ação</th>
+        <th scope="col">Pontuação</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Excluir</th>
     </tr>
     </thead>
     <tbody>
@@ -16,13 +18,19 @@
         <td th:text="${route.name}">Nome</td>
         <td th:text="${route.length}">Quilometragem máxima</td>
         <td th:text="${route.description}">Descrição</td>
-        <td><a th:href="@{'/route/edit/' + ${route.id}}" >Editar</a> || <a th:href="@{'/route/delete/' + ${route.id}}">Excluir</a></td>
+        <td th:text="${route.points}">Descrição</td>
+        <td><a th:href="@{'~/admin/route/edit/' + ${route.id}}"><i class="fa fa-pen"></i></a></td>
+        <td><a th:href="@{'~/admin/route/delete/' + ${route.id}}"><i class="fas fa-trash"></i></a></td>
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center">
     <h2 th:unless="${!routes.isEmpty()}">Sem Percursos</h2>
-    <a class="text-center" th:href="@{'~/route/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/route/add/'}">Adicionar</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/route/add/'}">Página Inicial</button></a></center>
-</center>
+    <a class="text-center" th:href="@{'~/admin/route/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/admin/route/add/'}">Adicionar</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary">Página Inicial</button>
+    </a>
+</div>
 <footer th:replace="fragments/footer :: footer"></footer>

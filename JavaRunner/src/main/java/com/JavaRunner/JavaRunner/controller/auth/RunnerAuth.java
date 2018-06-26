@@ -2,14 +2,14 @@ package com.JavaRunner.JavaRunner.controller.auth;
 
 import com.JavaRunner.JavaRunner.domain.model.Runner;
 import com.JavaRunner.JavaRunner.domain.repository.RunnerRepository;
-import com.JavaRunner.JavaRunner.utils.validations.Salt;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -43,8 +43,8 @@ public class RunnerAuth {
         System.out.println(runner);
         HashMap<String, String> errors = runner.findErrors();
         if (errors.isEmpty()) {
-            Runner register = repository.save(runner.setPassword
-                    (BCrypt.hashpw(runner.getPassword(), Salt.saltAdmin))
+            Runner register = repository.save(runner.setPassword(
+                    Hashing.sha256().hashString(runner.getPassword(), StandardCharsets.UTF_8).toString())
                     .beautify());
             req.getSession().setAttribute("runner", register);
             return "redirect:/runner";
@@ -56,7 +56,7 @@ public class RunnerAuth {
 
     @PostMapping
     public String doLogin(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
-        String hashed = BCrypt.hashpw(password, Salt.saltAdmin);
+        String hashed = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
         Optional<Runner> runner = repository.findByEmailAndPassword(email, hashed);
         if (runner.isPresent()) {
             request.setAttribute("runner", runner.get());

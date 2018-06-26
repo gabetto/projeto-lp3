@@ -7,10 +7,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="administrator">Administradores<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'~/admin'}">Administradores<span class="sr-only">(current)</span></a>
             </li>
             <li>
-                <a class="nav-link active" href="runner">Corredores<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" th:href="@{'~/admin/runner'}">Corredores
+                    <span class="sr-only">(current)</span></a>
             </li>
             <li>
                 <a class="nav-link active" th:href="@{'~/admin/race'}">Corridas
@@ -31,11 +32,15 @@
                     <span class="sr-only">(current)</span></a>
             </li>
             <li>
-                <a class="nav-link active" th:href="@{'~/admin/routes'}">Percursos
+                <a class="nav-link active" th:href="@{'~/admin/route'}">Percursos
                     <span class="sr-only">(current)</span></a>
             </li>
             <li>
-                <a class="nav-link active" th:href="@{'~/admin/rules'}">Regras<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" th:href="@{'~/admin/rule'}">Regras<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link active" th:href="@{'~/auth/admin/logout'}">Logout
+                    <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

@@ -25,9 +25,9 @@ public class JavaRunnerApplication implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AdminFilter())
-                .addPathPatterns("/admin*")
-                .excludePathPatterns("templates/**", "static/**");
+//        registry.addInterceptor(new AdminFilter())
+//                .addPathPatterns("/admin*", "/admin/**")
+//                .excludePathPatterns("templates/**", "static/**");
     }
 
     @Override

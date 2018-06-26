@@ -5,13 +5,14 @@
     <tr>
         <td>Nome</td>
         <td>E-mail</td>
-        <td colspan="2">Acao</td>
+        <td colspan="2">Editar</td>
+        <td colspan="2">Excluir</td>
     </tr>
     <tr th:each="runner : ${runners}">
         <td th:text="${runner.name}">Nome</td>
         <td th:text="${runner.email}">E-mail</td>
-        <td><a th:href="@{'/runner/edit/' + ${runner.id}}">Editar</a></td>
-        <td><a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
+        <td><a th:href="@{'~/admin/runner/edit/' + ${runner.id}}">Editar</a></td>
+        <td><a th:href="@{'~/admin/runner/delete/' + ${runner.id}}">Excluir</a></td>
     </tr>
 </table>
 
@@ -26,13 +27,18 @@
     <tr th:each="rule : ${runners}">
         <td th:text="${runner.name}">Nome</td>
         <td th:text="${runner.email">E-mail</td>
-        <td><a th:href="@{'/runner/edit/' + ${runner.id}}" >Editar</a> || <a th:href="@{'/runner/delete/' + ${runner.id}}">Excluir</a></td>
+        <td><a th:href="@{'~/admin/runner/edit/' + ${runner.id}}">Editar</a></td>
+        <td><a th:href="@{'~/admin/runner/delete/' + ${runner.id}}">Excluir</a></td>
     </tr>
     </tbody>
 </table>
 <center>
     <h2 th:unless="${!runners.isEmpty()}">Sem Corredores</h2>
-    <a class="text-center" th:href="@{'~/runner/add/'}"><button type="button" class="btn btn-primary" th:href="@{'~/runner/add/'}">Adicionar coredor</button></a>
-    <a class="text-center" th:href="@{'~/'}"><button type="button" class="btn btn-secondary" th:href="@{'~/'}">Página Inicial</button></a>
+    <a class="text-center" th:href="@{'~/admin/runner/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/admin/runner/add/'}">Adicionar coredor</button>
+    </a>
+    <a class="text-center" th:href="@{'~/'}">
+        <button type="button" class="btn btn-secondary">Página Inicial</button>
+    </a>
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

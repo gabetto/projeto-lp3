@@ -8,8 +8,6 @@
         <th scope="col">Data</th>
         <th scope="col">Máximo de inscritos</th>
         <th scope="col">Organizador</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Excluir</th>
     </tr>
     </thead>
     <tbody>
@@ -19,10 +17,7 @@
         <td th:text="${race.subscribes}">Máximo de inscritos</td>
         <td th:text="${race.organizer}">Organizer</td>
         <td>
-            <a th:href="@{'~/admin/race/edit/' + ${race.id}}"><i class="fas fa-pen"></i></a>
-        </td>
-        <td>
-            <a th:href="@{'~/admin/race/delete/' + ${race.id}}"><i class="fas fa-trash"></i></a>
+            <a th:href="@{'~/subscribe/' + ${race.id}}"><i class="fas fa-pen"></i></a>
         </td>
     </tr>
     </tbody>

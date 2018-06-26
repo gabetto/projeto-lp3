@@ -1,4 +1,4 @@
-<head th:replace="fragments/head:: head" xmlns:th="http://www.w3.org/1999/xhtml"></head>
+<head xmlns:th="http://www.w3.org/1999/xhtml" th:replace="fragments/head:: head"></head>
 <navbar th:replace="fragments/anon/navbar :: navbar"></navbar>
 <center><h1>Lista de Produtos</h1></center>
 
@@ -24,11 +24,11 @@
 </table>
 <div class="text-center mt2">
     <h2 th:unless="${!products.isEmpty()}">Sem Produtos</h2>
-    <a class="text-center" th:href="@{'~/product/add/'}">
-        <button type="button" class="btn btn-primary" th:href="@{'~/product/add/'}">Adicionar</button>
+    <a class="text-center" th:href="@{'~/admin/product/add/'}">
+        <button type="button" class="btn btn-primary" th:href="@{'~/admin/product/add/'}">Adicionar</button>
     </a>
     <a class="text-center" th:href="@{'~/'}">
-        <button type="button" class="btn btn-secondary" th:href="@{'~/product/add/'}">Página Inicial</button>
+        <button type="button" class="btn btn-secondary">Página Inicial</button>
     </a>
 </div>
 <footer th:replace="fragments/footer :: footer"></footer>

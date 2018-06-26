@@ -39,7 +39,7 @@ public class ProductController {
     public String postProductAdd(Model model, @ModelAttribute Product product) {
         model.addAttribute("tittle", "Adicionar produto");
         productRepository.save(product);
-        return "redirect:/product";
+        return "redirect:/admin/product";
     }
 
     @GetMapping(value = "/edit/{id}")
@@ -62,7 +62,7 @@ public class ProductController {
         } else {
             model.addAttribute("error", "Dados incorretos");
         }
-        return "redirect:/product";
+        return "redirect:/admin/product";
     }
 
     @GetMapping(value = "/delete/{id}")
@@ -81,6 +81,6 @@ public class ProductController {
     @PostMapping(value = "delete/{id}")
     public String postProductDelete(@PathVariable String id, @ModelAttribute Product product) {
         productRepository.delete(product);
-        return "redirect:/product";
+        return "redirect:/admin/product";
     }
 }

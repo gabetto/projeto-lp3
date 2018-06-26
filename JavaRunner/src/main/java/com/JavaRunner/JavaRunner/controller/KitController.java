@@ -46,14 +46,14 @@ public class KitController {
         model.addAttribute("operation", "add");
         model.addAttribute("title", "Adicionar kit");
         model.addAttribute("botaoOperacao", "Adicionar kit");
-        model.addAttribute("corridas", raceRepository.findAll());
+        model.addAttribute("corridas", raceRepository.findAllByOrderByDataDesc());
         return "kit/formKit";
     }
 
     @PostMapping(value = "/add")
     public String postKitAdd(@ModelAttribute Kit kit) {
         kitRepository.save(kit);
-        return "redirect:/kit";
+        return "redirect:/admin/kit";
     }
 
     @GetMapping(value = "/edit/{id}")
@@ -73,7 +73,7 @@ public class KitController {
         } else {
             model.addAttribute("error", "Dados incorretos");
         }
-        return "redirect:/kit";
+        return "redirect:/admin/kit";
     }
 
     @GetMapping(value = "/delete/{id}")
@@ -89,7 +89,7 @@ public class KitController {
     @PostMapping(value = "/delete/{id}")
     public String postKitDelete(@PathVariable String id, @ModelAttribute Kit kit) {
         kitRepository.delete(kit);
-        return "redirect:/kit";
+        return "redirect:/admin/kit";
     }
 
 }

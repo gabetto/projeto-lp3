@@ -87,7 +87,7 @@ public class Race extends DatabaseCommons implements Validator<Race> {
                 .setKitWithdraw(kitWithdraw).setRegion(region)
                 .setState(state).setCity(city).setDescription(description)
                 .setEndDescription(endDescription).setFinalCep(finalCep)
-                .setColor(color).setChip(chip).setFinalHour(finalHour)
+                .setColor(color).setChip(chip).setFinalHour(finalHour).setImage(image)
                 .setInitialHour(initialHour).setStartDescription(startDescription);
     }
 }

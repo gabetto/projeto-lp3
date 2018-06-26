@@ -21,24 +21,24 @@ public class RouteController {
     RaceRepository raceRepository;
 
     @GetMapping(value = "")
-    public String route(Model model){
+    public String route(Model model) {
         model.addAttribute("routes", routeRepository.findAll());
         return "route/listRoute";
     }
 
     @GetMapping(value = "add")
-    public String getRouteAdd(Model model){
+    public String getRouteAdd(Model model) {
         model.addAttribute("operation", "add");
-        model.addAttribute("tittle", "Adicionar percurso");
+        model.addAttribute("title", "Adicionar percurso");
         model.addAttribute("botaoOperacao", "Adicionar percurso");
         model.addAttribute("corridas", raceRepository.findAll());
         return "route/formRoute";
     }
 
     @PostMapping(value = "add")
-    public String postRouteAdd(Model model, @ModelAttribute Route route){
+    public String postRouteAdd(Model model, @ModelAttribute Route route) {
         routeRepository.save(route);
-        return "redirect:/route";
+        return "redirect:/admin/route";
     }
 
     @GetMapping(value = "/edit/{id}")
@@ -47,7 +47,7 @@ public class RouteController {
         model.addAttribute("title", "Editar percurso");
         model.addAttribute("botaoOperacao", "Editar percurso");
         Optional<Route> route = routeRepository.findById(id);
-        if (route.isPresent()){
+        if (route.isPresent()) {
             model.addAttribute("route", route.get());
         }
         return "route/formRoute";
@@ -55,13 +55,13 @@ public class RouteController {
 
     @PostMapping(value = "/edit/{id}")
     public String postRouteEdit(@ModelAttribute Route route, Model model,
-                              @PathVariable String id) throws Exception {
+                                @PathVariable String id) throws Exception {
         if (id.equals(route.getId())) {
             routeRepository.save(route);
         } else {
             model.addAttribute("error", "Dados incorretos");
         }
-        return "redirect:/route";
+        return "redirect:/admin/route";
     }
 
     @GetMapping(value = "delete/{id}")
@@ -77,8 +77,8 @@ public class RouteController {
     }
 
     @PostMapping(value = "delete/{id}")
-    public String postRunDelete(@PathVariable String id, @ModelAttribute Route route) {
-        routeRepository.delete(route);
-        return "redirect:/route";
+    public String postRunDelete(@PathVariable String id) {
+        routeRepository.deleteById(id);
+        return "redirect:/admin/route";
     }
 }
