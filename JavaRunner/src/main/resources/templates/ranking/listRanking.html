@@ -21,13 +21,18 @@
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center">
     <h2 th:unless="${!rankings.isEmpty()}">Sem Rankings</h2>
     <a class="text-center" th:href="@{'~/admin/ranking/add/'}">
         <button type="button" class="btn btn-primary" th:href="@{'~/admin/ranking/add/'}">Adicionar</button>
     </a>
     <a class="text-center" th:href="@{'~/'}">
         <button type="button" class="btn btn-secondary">Página Inicial</button>
-    </a></center>
+    </a>
+    <a class="text-center" th:href="@{'~/admin/rankingReport/ranking'}">
+        <button type="button" class="btn btn-secondary" th:href="@{'~/admin/rankingReport/ranking'}">Gerar Relatório</button>
+    </a>
+</div>
+
 </center>
 <footer th:replace="fragments/footer :: footer"></footer>

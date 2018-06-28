@@ -32,7 +32,7 @@
     </tr>
     </tbody>
 </table>
-<center>
+<div class="text-center">
     <h2 th:unless="${!runners.isEmpty()}">Sem Corredores</h2>
     <a class="text-center" th:href="@{'~/admin/runner/add/'}">
         <button type="button" class="btn btn-primary" th:href="@{'~/admin/runner/add/'}">Adicionar coredor</button>
@@ -40,5 +40,8 @@
     <a class="text-center" th:href="@{'~/'}">
         <button type="button" class="btn btn-secondary">Página Inicial</button>
     </a>
-</center>
+    <a class="text-center" th:href="@{'~/admin/runnerReport/runner'}">
+        <button type="button" class="btn btn-secondary" th:href="@{'~/admin/runnerReport/runner'}">Gerar Relatório</button>
+    </a>
+</div>
 <footer th:replace="fragments/footer :: footer"></footer>
